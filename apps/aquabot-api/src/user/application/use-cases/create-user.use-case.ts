@@ -1,22 +1,22 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { hash } from "bcrypt";
-import { UserAlreadyExistsError } from "src/user/errors";
-import { BcryptConfig } from "../../../config/bcrypt.config";
-import { IUserCreateParams } from "../../contracts";
-import { User } from "../../domain/entities";
-import { IUserRepo } from "../../domain/repos";
-import { USER_REPO } from "../../tokens";
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { hash } from 'bcrypt';
+import { BcryptConfig } from '../../../config/bcrypt.config';
+import { IUserCreateParams } from '../../contracts';
+import { User } from '../../domain/entities';
+import { IUserRepo } from '../../domain/repos';
+import { UserAlreadyExistsError } from '../../errors/user-already-exists.error';
+import { USER_REPO } from '../../tokens';
 
 @Injectable()
 export class CreateUserUseCase {
   constructor(
     @Inject(USER_REPO) private readonly userRepo: IUserRepo,
-    private readonly configService: ConfigService<BcryptConfig>
+    private readonly configService: ConfigService<BcryptConfig>,
   ) {}
 
   async execute(params: IUserCreateParams): Promise<User> {
-    const salt = this.configService.get("bcrypt.salt") as number;
+    const salt = this.configService.get('bcrypt.salt') as number;
 
     const existingUser = await this.userRepo.findByEmail(params.email);
 
@@ -30,7 +30,7 @@ export class CreateUserUseCase {
 
     const user = new User({
       ...params,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     return this.userRepo.create(user);

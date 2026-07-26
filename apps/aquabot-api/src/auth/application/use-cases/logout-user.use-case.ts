@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
-import { IUserLogoutParams } from "src/auth/contracts";
-import { IPrincipal } from "src/common/interfaces";
-import { SessionService } from "../../application/services/session.service";
+import { Injectable } from '@nestjs/common';
+import { IUserLogoutParams } from '../../../auth/contracts';
+import { IPrincipal } from '../../../common/interfaces';
+import { SessionService } from '../../application/services/session.service';
 
 @Injectable()
 export class LogoutUserUseCase {
@@ -9,7 +9,7 @@ export class LogoutUserUseCase {
 
   async execute(
     principal: IPrincipal,
-    params: IUserLogoutParams
+    params: IUserLogoutParams,
   ): Promise<boolean> {
     void principal;
 

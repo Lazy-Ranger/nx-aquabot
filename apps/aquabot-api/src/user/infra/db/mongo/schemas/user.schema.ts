@@ -1,18 +1,18 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
-import { UserResource } from "src/common/resources";
-import { Gender, IUser, Provider, UserStatus } from "../../../../contracts";
-import { AddressDocument, AddressSchemaDef } from "./address.schema";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { UserResource } from '../../../../../common/resources';
+import { Gender, IUser, Provider, UserStatus } from '../../../../contracts';
+import { AddressDocument, AddressSchemaDef } from './address.schema';
 
 export type UserDocument = HydratedDocument<UserSchema>;
 
-export interface IUserPersistence extends Omit<IUser, "id" | "name"> {
+export interface IUserPersistence extends Omit<IUser, 'id' | 'name'> {
   password?: string;
 }
 
 @Schema({
   timestamps: true,
-  collection: UserResource.collectionName
+  collection: UserResource.collectionName,
 })
 export class UserSchema implements IUserPersistence {
   @Prop({ required: true, min: 2, max: 50 })
@@ -20,7 +20,7 @@ export class UserSchema implements IUserPersistence {
 
   @Prop({
     min: 2,
-    max: 50
+    max: 50,
   })
   lastName?: string;
 
@@ -28,7 +28,7 @@ export class UserSchema implements IUserPersistence {
   email!: string;
 
   @Prop({
-    required: true
+    required: true,
   })
   phone!: string;
 
@@ -41,13 +41,13 @@ export class UserSchema implements IUserPersistence {
   @Prop({
     required: true,
     type: String,
-    enum: UserStatus
+    enum: UserStatus,
   })
   status!: UserStatus;
 
   @Prop({
     type: AddressSchemaDef,
-    required: true
+    required: true,
   })
   address!: AddressDocument;
 

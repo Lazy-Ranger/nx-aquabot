@@ -1,13 +1,13 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { JwtService } from "@nestjs/jwt";
-import { ICacheService } from "src/application/ports/cache.port";
-import { JwtConfig } from "../../../config/jwt.config";
-import { CACHE_SERVICE } from "../../../tokens";
-import { ISessionCreateParams } from "../../contracts";
-import { Session } from "../../domain/entities";
-import { ISessionRepo } from "../../domain/repos";
-import { SESSION_REPO } from "../../tokens";
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { ICacheService } from '../../../application/ports/cache.port';
+import { JwtConfig } from '../../../config/jwt.config';
+import { CACHE_SERVICE } from '../../../tokens';
+import { ISessionCreateParams } from '../../contracts';
+import { Session } from '../../domain/entities';
+import { ISessionRepo } from '../../domain/repos';
+import { SESSION_REPO } from '../../tokens';
 
 interface ICachedSession {
   jti: string;
@@ -25,7 +25,7 @@ export class SessionService {
     @Inject(SESSION_REPO) private readonly sessionRepo: ISessionRepo,
     @Inject(CACHE_SERVICE) private readonly cache: ICacheService,
     private readonly jwtService: JwtService,
-    private readonly config: ConfigService<JwtConfig>
+    private readonly config: ConfigService<JwtConfig>,
   ) {}
 
   private getSessionCacheKey(userId: string) {
@@ -44,7 +44,7 @@ export class SessionService {
       accessToken: params.accessToken,
       refreshToken: params.refreshToken,
       ip: params.ip,
-      userAgent: params.userAgent
+      userAgent: params.userAgent,
     });
 
     const savedSession = await this.sessionRepo.create(session);
@@ -55,7 +55,7 @@ export class SessionService {
       jti: params.jti,
       accessToken: params.accessToken,
       refreshToken: params.refreshToken,
-      idToken: params.idToken
+      idToken: params.idToken,
     };
 
     const isSessionExists = await this.cache.get(cacheKey);
@@ -77,7 +77,7 @@ export class SessionService {
     const key = this.getRevokedCacheKey(jti);
     const isRevokedToken = (await this.cache.get(key)) as unknown as number;
 
-    if (isRevokedToken !== 0) {
+    if (isRevokedToken !== 0 && isRevokedToken !== null) {
       return true;
     }
     return false;
@@ -92,7 +92,7 @@ export class SessionService {
       return;
     }
 
-    const sessions: ICachedSession[] = JSON.parse(isSessionExists || "[]");
+    const sessions: ICachedSession[] = JSON.parse(isSessionExists || '[]');
 
     const session = sessions.find((session) => session.jti === jti);
 
@@ -115,7 +115,7 @@ export class SessionService {
     await this.cache.set(
       revokedKey,
       JSON.stringify([accessToken, refreshToken]),
-      ttl
+      ttl,
     );
 
     const liveSessions = sessions.filter((session) => session.jti !== jti);
@@ -137,7 +137,7 @@ export class SessionService {
 
     for (const session of sessions) {
       this.destroy(session.jti, userId).catch((err) => {
-        console.log("cannot destroy session", err);
+        console.log('cannot destroy session', err);
       });
     }
 

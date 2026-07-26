@@ -2,10 +2,10 @@ import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  NestInterceptor
-} from "@nestjs/common";
-import { Observable, tap } from "rxjs";
-import { RefreshTokenService } from "../application/services/refresh-token.service";
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable, tap } from 'rxjs';
+import { RefreshTokenService } from '../application/services/refresh-token.service';
 
 @Injectable()
 export class ClearRefreshTokenInterceptor implements NestInterceptor {

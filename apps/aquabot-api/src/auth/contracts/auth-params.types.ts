@@ -1,6 +1,6 @@
-import { IClientRequestInfo } from "src/common/interfaces";
-import { IUser, Provider } from "src/user/contracts";
-import { ILoginUserRequest, IRegisterUserRequest } from "./auth.types";
+import { IClientRequestInfo } from '../../common/interfaces';
+import { IUser, Provider } from '../../user/contracts';
+import { ILoginUserRequest, IRegisterUserRequest } from './auth.types';
 
 export interface IRefreshTokenParams {
   jti: string;

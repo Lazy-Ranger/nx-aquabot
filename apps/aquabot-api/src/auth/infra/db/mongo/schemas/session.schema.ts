@@ -1,16 +1,16 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
-import { SessionResource } from "src/common/resources";
-import { ISession } from "../../../../contracts";
-import { UserAgentDocument } from "./user-agent.schema";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { SessionResource } from '../../../../../common/resources';
+import { ISession } from '../../../../contracts';
+import { UserAgentDocument } from './user-agent.schema';
 
 export type AuthSessionDocument = HydratedDocument<AuthSessionSchema>;
 
-export interface IAuthSessionPersistence extends Omit<ISession, "id"> {}
+export interface IAuthSessionPersistence extends Omit<ISession, 'id'> {}
 
 @Schema({
   timestamps: true,
-  collection: SessionResource.collectionName
+  collection: SessionResource.collectionName,
 })
 export class AuthSessionSchema implements IAuthSessionPersistence {
   @Prop({ required: true, unique: true })

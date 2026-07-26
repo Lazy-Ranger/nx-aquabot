@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import { Type } from 'class-transformer';
 import {
   IsEmail,
   IsEnum,
@@ -10,11 +10,11 @@ import {
   IsUrl,
   MaxLength,
   MinLength,
-  ValidateNested
-} from "class-validator";
-import { IRegisterUserRequest } from "src/auth/contracts";
-import { Gender } from "../../../../user/contracts";
-import { CreateAddressDto } from "./address.dto";
+  ValidateNested,
+} from 'class-validator';
+import { IRegisterUserRequest } from '../../../../auth/contracts';
+import { Gender } from '../../../../user/contracts';
+import { CreateAddressDto } from './address.dto';
 
 export class RegisterUserDto implements IRegisterUserRequest {
   @IsString()

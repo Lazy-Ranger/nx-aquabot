@@ -1,13 +1,12 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { CookieOptions, Request, Response } from "express";
-import * as ms from "ms";
-import { StringValue } from "ms";
-import { ICacheService } from "src/application/ports/cache.port";
-import { CACHE_SERVICE } from "src/tokens";
-import { AppConfig } from "../../../config/app.config";
-import { JwtConfig } from "../../../config/jwt.config";
-import { SessionService } from "./session.service";
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { CookieOptions, Request, Response } from 'express';
+import ms, { StringValue } from 'ms';
+import { ICacheService } from '../../../application/ports/cache.port';
+import { AppConfig } from '../../../config/app.config';
+import { JwtConfig } from '../../../config/jwt.config';
+import { CACHE_SERVICE } from '../../../tokens';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class RefreshTokenService {
@@ -18,22 +17,22 @@ export class RefreshTokenService {
   constructor(
     private readonly config: ConfigService<AppConfig & JwtConfig>,
     @Inject(CACHE_SERVICE) private readonly cache: ICacheService,
-    private readonly sessionService: SessionService
+    private readonly sessionService: SessionService,
   ) {
     const refreshTokenExpireTime = this.config.getOrThrow<StringValue>(
-      "jwt.refreshTokenExpireTime"
+      'jwt.refreshTokenExpireTime',
     );
 
     this.refreshTokenCookieOptions = {
       httpOnly: true,
-      secure: !this.config.getOrThrow<boolean>("app.isLocal"),
-      sameSite: "strict" as const,
+      secure: !this.config.getOrThrow<boolean>('app.isLocal'),
+      sameSite: 'strict' as const,
       maxAge: ms(refreshTokenExpireTime),
-      path: "/auth"
+      path: '/auth',
     };
 
     this.refreshTokenCookieName = this.config.getOrThrow(
-      "jwt.refreshTokenCookieName"
+      'jwt.refreshTokenCookieName',
     );
   }
 
@@ -49,14 +48,14 @@ export class RefreshTokenService {
     response.cookie(
       this.refreshTokenCookieName,
       refreshToken,
-      this.refreshTokenCookieOptions
+      this.refreshTokenCookieOptions,
     );
   }
 
   public clearRefreshToken(response: Response) {
     response.cookie(
       this.refreshTokenCookieName,
-      this.refreshTokenCookieOptions
+      this.refreshTokenCookieOptions,
     );
   }
 

@@ -1,31 +1,31 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { IssueTokenResponse } from "src/auth/contracts";
-import { IRefreshTokenParams } from "src/auth/contracts/auth-params.types";
-import { IPrincipal } from "src/common/interfaces";
-import { PlatformConfig } from "src/config/platform.config";
-import { UserService } from "../../../user/application/services";
-import { SessionService } from "../services/session.service";
-import { IssueTokensUseCase } from "./issue-tokens.use-case";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { IRefreshTokenParams } from '../../../../src/auth/contracts/auth-params.types';
+import { IPrincipal } from '../../../../src/common/interfaces';
+import { PlatformConfig } from '../../../../src/config/platform.config';
+import { IssueTokenResponse } from '../../../auth/contracts';
+import { UserService } from '../../../user/application/services';
+import { SessionService } from '../services/session.service';
+import { IssueTokensUseCase } from './issue-tokens.use-case';
 
 @Injectable()
 export class RefreshTokensUseCase {
   private readonly domain: string;
 
   private readonly errorMetadata = {
-    location: "Refresh",
-    locationType: "Invalid credentials"
+    location: 'Refresh',
+    locationType: 'Invalid credentials',
   };
   constructor(
     private readonly userService: UserService,
     private readonly issueTokensUseCase: IssueTokensUseCase,
     private readonly sessionService: SessionService,
-    private readonly config: ConfigService<PlatformConfig>
+    private readonly config: ConfigService<PlatformConfig>,
   ) {}
 
   async execute(
     principal: IPrincipal,
-    params: IRefreshTokenParams
+    params: IRefreshTokenParams,
   ): Promise<IssueTokenResponse> {
     const { jti } = params;
 
@@ -41,7 +41,7 @@ export class RefreshTokensUseCase {
     }
 
     return await this.issueTokensUseCase.execute({
-      user
+      user,
     });
   }
 }

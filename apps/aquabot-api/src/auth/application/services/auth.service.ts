@@ -1,19 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { IClientRequestInfo } from "src/common/interfaces";
-import { IUser } from "src/user/contracts";
+import { Injectable } from '@nestjs/common';
+import { IClientRequestInfo } from '../../../common/interfaces';
+import { IUser } from '../../../user/contracts';
 import {
   ILoggedInResponse,
   ISessionCreateParams,
   IssueTokenResponse,
   IUserLoginParams,
-  IUserRegisterParams
-} from "../../contracts";
+  IUserRegisterParams,
+} from '../../contracts';
 import {
   IssueTokensUseCase,
   LoginUserUseCase,
-  RegisterUserUseCase
-} from "../use-cases";
-import { SessionService } from "./session.service";
+  RegisterUserUseCase,
+} from '../use-cases';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class AuthService {
@@ -21,14 +21,14 @@ export class AuthService {
     private readonly sessionService: SessionService,
     private readonly registerUserUC: RegisterUserUseCase,
     private readonly loginUserUC: LoginUserUseCase,
-    private readonly issueTokensUC: IssueTokensUseCase
+    private readonly issueTokensUC: IssueTokensUseCase,
   ) {}
 
   async register(params: IUserRegisterParams): Promise<ILoggedInResponse> {
     const user = await this.registerUserUC.execute(params);
 
     const issuedTokens = await this.issueTokensUC.execute({
-      user
+      user,
     });
 
     await this.createUserSession(user, issuedTokens, params.clientRequestInfo);
@@ -36,7 +36,7 @@ export class AuthService {
     return {
       accessToken: issuedTokens.accessToken,
       idToken: issuedTokens.idToken,
-      refreshToken: issuedTokens.refreshToken
+      refreshToken: issuedTokens.refreshToken,
     };
   }
 
@@ -48,21 +48,21 @@ export class AuthService {
     return {
       accessToken: issuedTokens.accessToken,
       idToken: issuedTokens.idToken,
-      refreshToken: issuedTokens.refreshToken
+      refreshToken: issuedTokens.refreshToken,
     };
   }
 
   private async createUserSession(
     user: IUser,
     issuedTokens: IssueTokenResponse,
-    clientRequestInfo: IClientRequestInfo
+    clientRequestInfo: IClientRequestInfo,
   ) {
     const sessionParams: ISessionCreateParams = {
       ...issuedTokens,
       userId: user.id,
       ip: clientRequestInfo.ip,
       userAgent: clientRequestInfo.userAgent,
-      email: user.email
+      email: user.email,
     };
 
     await this.sessionService.create(sessionParams);

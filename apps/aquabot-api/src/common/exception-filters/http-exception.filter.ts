@@ -3,12 +3,12 @@ import {
   Catch,
   ExceptionFilter,
   HttpException,
-  HttpStatus
-} from "@nestjs/common";
-import { HttpAdapterHost } from "@nestjs/core";
+  HttpStatus,
+} from '@nestjs/common';
+import { HttpAdapterHost } from '@nestjs/core';
 
-import { ConfigService } from "@nestjs/config";
-import { PlatformConfig } from "../../config/platform.config";
+import { ConfigService } from '@nestjs/config';
+import { PlatformConfig } from '../../config/platform.config';
 import {
   BadRequest,
   ErrorCodeHttpCodeMap,
@@ -16,8 +16,8 @@ import {
   ErrorInfo,
   HttpStatusCodeErrorCodeMap,
   ResourceInfo,
-  SerializedErrorResponse
-} from "../errors";
+  SerializedErrorResponse,
+} from '../errors';
 
 type CatchableError = ErrorDetail | HttpException | Error | unknown;
 
@@ -26,9 +26,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
   private domain: string;
   constructor(
     private readonly httpAdapterHost: HttpAdapterHost,
-    private readonly config: ConfigService<PlatformConfig>
+    private readonly config: ConfigService<PlatformConfig>,
   ) {
-    this.domain = this.config.getOrThrow("platform.name");
+    this.domain = this.config.getOrThrow('platform.name');
   }
 
   catch(exception: CatchableError, host: ArgumentsHost): void {
@@ -61,7 +61,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       httpStatusCode,
       message,
       error.code,
-      details
+      details,
     );
   }
 
@@ -79,26 +79,26 @@ export class HttpExceptionFilter implements ExceptionFilter {
       405,
       409,
       500,
-      504
+      504,
     ].includes(httpStatusCode);
 
     const statusCode = HttpStatusCodeErrorCodeMap[httpStatusCode];
 
     if (canBeResourceInfo) {
-      detail = new ResourceInfo(message, "", "", "");
+      detail = new ResourceInfo(message, '', '', '');
       detail.code = statusCode;
     }
 
     const canBeBadRequest = [HttpStatus.BAD_REQUEST].includes(httpStatusCode);
 
     if (canBeBadRequest) {
-      const errorMessages = (exceptionResponse as Record<"message", string[]>)
+      const errorMessages = (exceptionResponse as Record<'message', string[]>)
         ?.message;
       detail = new BadRequest(
         (errorMessages || []).map((message) => ({
-          field: "body",
-          description: message
-        }))
+          field: 'body',
+          description: message,
+        })),
       );
       detail.code = statusCode;
     }
@@ -106,7 +106,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const canBeErrorInfo = [
       HttpStatus.INTERNAL_SERVER_ERROR,
       HttpStatus.SERVICE_UNAVAILABLE,
-      HttpStatus.UNAUTHORIZED
+      HttpStatus.UNAUTHORIZED,
     ].includes(httpStatusCode);
 
     if (canBeErrorInfo) {

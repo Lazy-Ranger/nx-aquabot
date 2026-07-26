@@ -1,20 +1,20 @@
-import { Injectable } from "@nestjs/common";
-import { UserNotFoundError } from "src/user/errors";
-import { IUser, IUserCreateParams, RetrieveUserBy } from "../../contracts";
-import { UserMapper } from "../mappers";
-import { CreateUserUseCase, RetrieveUserUseCase } from "../use-cases";
+import { Injectable } from '@nestjs/common';
+import { UserNotFoundError } from '../../../../src/user/errors';
+import { IUser, IUserCreateParams, RetrieveUserBy } from '../../contracts';
+import { UserMapper } from '../mappers';
+import { CreateUserUseCase, RetrieveUserUseCase } from '../use-cases';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly retrieveUserUseCase: RetrieveUserUseCase,
-    private readonly createUserUseCase: CreateUserUseCase
+    private readonly createUserUseCase: CreateUserUseCase,
   ) {}
 
   async findById(id: string): Promise<IUser | null> {
     const user = await this.retrieveUserUseCase.execute({
       by: RetrieveUserBy.ID,
-      value: id
+      value: id,
     });
 
     if (!user) {
@@ -38,7 +38,7 @@ export class UserService {
     try {
       const user = await this.retrieveUserUseCase.execute({
         by: RetrieveUserBy.EMAIL,
-        value: email
+        value: email,
       });
 
       if (!user) {
@@ -59,11 +59,11 @@ export class UserService {
 
   async validateByEmailAndPassword(
     email: string,
-    password: string
+    password: string,
   ): Promise<IUser | null> {
     const user = await this.retrieveUserUseCase.execute({
       by: RetrieveUserBy.EMAIL,
-      value: email
+      value: email,
     });
 
     if (!(await user.hasValidPassword(password))) {

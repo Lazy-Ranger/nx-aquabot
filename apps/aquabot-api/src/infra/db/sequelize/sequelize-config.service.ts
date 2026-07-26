@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   SequelizeModuleOptions,
   SequelizeOptionsFactory,
-} from "@nestjs/sequelize";
-import { DatabaseConfig } from "src/config/database.config";
+} from '@nestjs/sequelize';
+import { DatabaseConfig } from '../../../../src/config/database.config';
 
 @Injectable()
 export class SequelizeConfigService implements SequelizeOptionsFactory {
@@ -14,12 +14,12 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
     connectionName?: string,
   ): Promise<SequelizeModuleOptions> | SequelizeModuleOptions {
     return {
-      dialect: "mysql",
-      host: "localhost",
+      dialect: 'mysql',
+      host: 'localhost',
       port: 3306,
-      username: "root",
-      password: "admin",
-      database: "users_db",
+      username: 'root',
+      password: 'admin',
+      database: 'users_db',
     };
   }
 }

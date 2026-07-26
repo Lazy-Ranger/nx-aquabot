@@ -1,32 +1,32 @@
-import { ExecutionContext, Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { AuthGuard } from "@nestjs/passport";
-import { Request } from "express";
-import { ErrorReason } from "src/common/errors";
-import { PlatformConfig } from "src/config/platform.config";
-import { ICacheService } from "../../application/ports/cache.port";
-import { CACHE_SERVICE } from "../../tokens";
-import { SessionService } from "../application/services/session.service";
-import { UnauthorizedError } from "../errors";
-import { Strategy } from "../strategies/strategies.constants";
+import { ExecutionContext, Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
+import { ICacheService } from '../../application/ports/cache.port';
+import { ErrorReason } from '../../common/errors';
+import { PlatformConfig } from '../../config/platform.config';
+import { CACHE_SERVICE } from '../../tokens';
+import { SessionService } from '../application/services/session.service';
+import { UnauthorizedError } from '../errors';
+import { Strategy } from '../strategies/strategies.constants';
 
 @Injectable()
 export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
   private readonly domain: string;
 
   private readonly errorMetadata = {
-    location: "Bearer",
-    locationType: "header"
+    location: 'Bearer',
+    locationType: 'header',
   };
 
   constructor(
     @Inject(CACHE_SERVICE) private readonly cache: ICacheService,
     private readonly sessionService: SessionService,
-    private readonly config: ConfigService<PlatformConfig>
+    private readonly config: ConfigService<PlatformConfig>,
   ) {
     super();
 
-    this.domain = this.config.getOrThrow("platform.name");
+    this.domain = this.config.getOrThrow('platform.name');
   }
 
   async canActivate(context: ExecutionContext) {
@@ -36,21 +36,21 @@ export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
     const userAccessTokenClaim = request.user as Record<string, string>;
 
     const isTokenRevoked = await this.sessionService.validate(
-      userAccessTokenClaim.jti
+      userAccessTokenClaim.jti,
     );
 
     if (isTokenRevoked) {
       throw new UnauthorizedError(
-        "Access token is invalid or expired.",
-        ErrorReason.REFRESH_TOKEN_INVALID,
+        'Access token is invalid or expired.',
+        ErrorReason.ACCESS_TOKEN_INVALID,
         this.domain,
-        this.errorMetadata
+        this.errorMetadata,
       );
     }
 
     request.user = {
       id: userAccessTokenClaim.sub,
-      claim: userAccessTokenClaim
+      claim: userAccessTokenClaim,
     };
 
     return true;
@@ -62,7 +62,7 @@ export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
         err?.message,
         ErrorReason.REFRESH_TOKEN_INVALID,
         this.domain,
-        this.errorMetadata
+        this.errorMetadata,
       );
     }
     return user;

@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { IUser } from "src/user/contracts";
-import { UserService } from "../../../user/application/services";
-import { UserAlreadyExistsError } from "../../../user/errors";
-import { IUserRegisterParams } from "../../contracts";
+import { Injectable } from '@nestjs/common';
+import { UserService } from '../../../user/application/services';
+import { IUser } from '../../../user/contracts';
+import { UserAlreadyExistsError } from '../../../user/errors';
+import { IUserRegisterParams } from '../../contracts';
 
 @Injectable()
 export class RegisterUserUseCase {
