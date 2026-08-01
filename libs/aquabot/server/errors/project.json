@@ -1,0 +1,19 @@
+{
+  "name": "aquboat-server-errors",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/aquabot/server/errors/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/aquabot/server/errors",
+        "main": "libs/aquabot/server/errors/src/index.ts",
+        "tsConfig": "libs/aquabot/server/errors/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

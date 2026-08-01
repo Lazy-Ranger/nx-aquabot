@@ -13,7 +13,13 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "paths": {}
+    "paths": {
+      "@aquabot/shared/contract": [
+        "./libs/aquabot/shared/contract/src/index.ts"
+      ],
+      "@aquabot/server/errors": ["./libs/aquabot/server/errors/src/index.ts"],
+      "@aquabot/server/client": ["./libs/aqabot/server/client/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

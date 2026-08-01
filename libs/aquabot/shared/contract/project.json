@@ -1,0 +1,9 @@
+{
+  "name": "aquabot-shared-contract",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/aquabot/shared/contract/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "// targets": "to see all targets run: nx show project aquabot-shared-contract --web",
+  "targets": {}
+}
