@@ -1,12 +1,12 @@
+import { ILoginUserRequest } from '@aquabot/shared/contract';
 import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
-  MinLength
-} from "class-validator";
-import { ILoginUserRequest } from "../../../contracts";
+  MinLength,
+} from 'class-validator';
 
 export class LoginUserDto implements ILoginUserRequest {
   @IsString()

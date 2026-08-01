@@ -1,8 +1,8 @@
-import { IUser, IUserCreateParams } from "../../user/contracts";
+import { IUser, IUserCreateParams } from '@aquabot/shared/contract';
 
 export type IRegisterUserRequest = Omit<
   IUserCreateParams,
-  "provider" | "providerUserId"
+  'provider' | 'providerUserId'
 >;
 
 export interface ILoginUserRequest {

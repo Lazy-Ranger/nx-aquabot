@@ -1,22 +1,22 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { IUserUpdateParams, RetrieveUserBy } from "../../contracts";
-import { User } from "../../domain/entities";
-import { IUserRepo } from "../../domain/repos";
-import { UserUpdateFailedError } from "../../errors";
-import { USER_REPO } from "../../tokens";
-import { RetrieveUserUseCase } from "./retrieve-user.use-case";
+import { IUserUpdateParams, RetrieveUserBy } from '@aquabot/shared/contract';
+import { Inject, Injectable } from '@nestjs/common';
+import { User } from '../../domain/entities';
+import { IUserRepo } from '../../domain/repos';
+import { UserUpdateFailedError } from '../../errors';
+import { USER_REPO } from '../../tokens';
+import { RetrieveUserUseCase } from './retrieve-user.use-case';
 
 @Injectable()
 export class UpdateUserUseCase {
   constructor(
     @Inject(USER_REPO) private readonly userRepo: IUserRepo,
-    private readonly retrieveUserUC: RetrieveUserUseCase
+    private readonly retrieveUserUC: RetrieveUserUseCase,
   ) {}
 
   async execute(id: string, params: IUserUpdateParams): Promise<User> {
     const user = await this.retrieveUserUC.execute({
       by: RetrieveUserBy.ID,
-      value: id
+      value: id,
     });
 
     Object.assign(user, params);

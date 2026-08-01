@@ -1,6 +1,6 @@
+import { IUser } from '@aquabot/shared/contract';
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../../../user/application/services';
-import { IUser } from '../../../user/contracts';
 import { UserAlreadyExistsError } from '../../../user/errors';
 import { IUserRegisterParams } from '../../contracts';
 

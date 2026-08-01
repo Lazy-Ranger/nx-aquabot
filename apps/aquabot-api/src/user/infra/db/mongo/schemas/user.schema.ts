@@ -1,7 +1,7 @@
+import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contract';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { UserResource } from '../../../../../common/resources';
-import { Gender, IUser, Provider, UserStatus } from '../../../../contracts';
 import { AddressDocument, AddressSchemaDef } from './address.schema';
 
 export type UserDocument = HydratedDocument<UserSchema>;

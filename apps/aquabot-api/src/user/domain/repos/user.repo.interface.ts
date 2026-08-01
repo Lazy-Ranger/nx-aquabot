@@ -1,5 +1,8 @@
-import { IOffsetPaginationResult, IUserSearchParams } from "../../contracts";
-import { User } from "../entities";
+import {
+  IOffsetPaginationResult,
+  IUserSearchParams,
+} from '@aquabot/shared/contract';
+import { User } from '../entities';
 
 export interface IUserRepo {
   create(user: User): Promise<User>;

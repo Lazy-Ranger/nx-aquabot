@@ -1,3 +1,4 @@
+import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contract';
 import {
   AllowNull,
   AutoIncrement,
@@ -9,12 +10,11 @@ import {
   PrimaryKey,
   Table,
   Unique,
-} from "sequelize-typescript";
-import { Gender, IUser, Provider, UserStatus } from "../../../../contracts";
-import { AddressModel } from "./address.model";
+} from 'sequelize-typescript';
+import { AddressModel } from './address.model';
 
 @Table({
-  tableName: "users",
+  tableName: 'users',
   timestamps: true,
 })
 export class UserModel extends Model<IUser> {

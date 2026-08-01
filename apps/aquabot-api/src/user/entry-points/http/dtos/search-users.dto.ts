@@ -1,6 +1,6 @@
-import { Type } from "class-transformer";
-import { IsNumber, IsOptional, IsString } from "class-validator";
-import { IUserSearchParams } from "../../../contracts";
+import { IUserSearchParams } from '@aquabot/shared/contract';
+import { Type } from 'class-transformer';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class SearchUsersDto implements IUserSearchParams {
   @IsOptional()

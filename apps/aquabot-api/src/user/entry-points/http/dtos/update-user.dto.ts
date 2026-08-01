@@ -1,6 +1,6 @@
-import { PartialType } from "@nestjs/mapped-types";
-import { IUserUpdateParams } from "../../../contracts";
-import { CreateUserDto } from "./create-user.dto";
+import { IUserUpdateParams } from '@aquabot/shared/contract';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto
   extends PartialType(CreateUserDto)

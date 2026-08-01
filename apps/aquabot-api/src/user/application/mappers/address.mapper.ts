@@ -1,5 +1,5 @@
-import { IAddress } from "../../contracts";
-import { Address } from "../../domain/value-objects/address.vo";
+import { IAddress } from '@aquabot/shared/contract';
+import { Address } from '../../domain/value-objects/address.vo';
 
 export class AddressMapper {
   static toDto(address: Address): IAddress {
@@ -9,7 +9,7 @@ export class AddressMapper {
       city: address.city,
       state: address.state,
       postalCode: address.postalCode,
-      country: address.country
+      country: address.country,
     };
   }
 }

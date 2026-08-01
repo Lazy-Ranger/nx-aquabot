@@ -1,8 +1,8 @@
+import { IUserCreateParams } from '@aquabot/shared/contract';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { hash } from 'bcrypt';
 import { BcryptConfig } from '../../../config/bcrypt.config';
-import { IUserCreateParams } from '../../contracts';
 import { User } from '../../domain/entities';
 import { IUserRepo } from '../../domain/repos';
 import { UserAlreadyExistsError } from '../../errors/user-already-exists.error';

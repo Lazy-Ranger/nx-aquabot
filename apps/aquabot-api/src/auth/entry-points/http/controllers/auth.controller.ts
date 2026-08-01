@@ -1,3 +1,4 @@
+import { Provider } from '@aquabot/shared/contract';
 import {
   Body,
   Controller,
@@ -10,7 +11,6 @@ import {
 import { Principal } from '../../../../common/decorators/principal.decorator';
 import { HttpExceptionFilter } from '../../../../common/exception-filters/http-exception.filter';
 import { IHttpRequest, IPrincipal } from '../../../../common/interfaces';
-import { Provider } from '../../../../user/contracts';
 import { AuthService } from '../../../application/services/auth.service';
 import {
   LogoutUserAllDeviceUseCase,

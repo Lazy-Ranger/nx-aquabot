@@ -1,7 +1,7 @@
+import { RetrieveUserBy } from '@aquabot/shared/contract';
 import { ErrorCode, ResourceInfo } from '../../common/errors';
 import { UserResource } from '../../common/resources';
 import { buildResourcePathTemplate } from '../../common/resources/resource.utilts';
-import { RetrieveUserBy } from '../contracts';
 
 export class UserNotFoundError extends ResourceInfo {
   public readonly code = ErrorCode.NOT_FOUND;

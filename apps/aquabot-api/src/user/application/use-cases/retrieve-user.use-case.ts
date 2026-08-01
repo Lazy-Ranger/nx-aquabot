@@ -1,9 +1,9 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { IUserRetrieveParams, RetrieveUserBy } from "../../contracts";
-import { User } from "../../domain/entities";
-import { IUserRepo } from "../../domain/repos";
-import { UserNotFoundError } from "../../errors";
-import { USER_REPO } from "../../tokens";
+import { IUserRetrieveParams, RetrieveUserBy } from '@aquabot/shared/contract';
+import { Inject, Injectable } from '@nestjs/common';
+import { User } from '../../domain/entities';
+import { IUserRepo } from '../../domain/repos';
+import { UserNotFoundError } from '../../errors';
+import { USER_REPO } from '../../tokens';
 
 @Injectable()
 export class RetrieveUserUseCase {
@@ -20,7 +20,7 @@ export class RetrieveUserUseCase {
   }
 
   private async findByCriteria(
-    params: IUserRetrieveParams
+    params: IUserRetrieveParams,
   ): Promise<User | null> {
     switch (params.by) {
       case RetrieveUserBy.ID:

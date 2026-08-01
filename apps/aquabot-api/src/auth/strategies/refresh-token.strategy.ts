@@ -1,3 +1,4 @@
+import { IUserRefreshTokenClaim } from '@aquabot/shared/contract';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
@@ -5,7 +6,6 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IHttpRequest } from '../../common/interfaces';
 import { JwtConfig } from '../../config/jwt.config';
 import { RefreshTokenService } from '../application/services/refresh-token.service';
-import { IUserRefreshTokenClaim } from '../contracts';
 import { Strategy as JwtStrategy } from './strategies.constants';
 
 @Injectable()

@@ -1,10 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { IClientRequestInfo } from '../../../common/interfaces';
-import { IUser } from '../../../user/contracts';
 import {
   ILoggedInResponse,
-  ISessionCreateParams,
   IssueTokenResponse,
+  IUser,
+} from '@aquabot/shared/contract';
+import { Injectable } from '@nestjs/common';
+import { IClientRequestInfo } from '../../../common/interfaces';
+import {
+  // ILoggedInResponse,
+  ISessionCreateParams,
+  // IssueTokenResponse,
   IUserLoginParams,
   IUserRegisterParams,
 } from '../../contracts';

@@ -1,21 +1,21 @@
-import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/sequelize";
-import moment from "moment";
 import {
   IOffsetPaginationResult,
   IUserSearchFilter,
-  IUserSearchParams
-} from "../../../../contracts";
-import { User } from "../../../../domain/entities";
-import { IUserRepo } from "../../../../domain/repos";
-import { UserSequelizeMapper } from "../mappers/user-sequelize.mapper";
-import { UserModel } from "../models";
+  IUserSearchParams,
+} from '@aquabot/shared/contract';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import moment from 'moment';
+import { User } from '../../../../domain/entities';
+import { IUserRepo } from '../../../../domain/repos';
+import { UserSequelizeMapper } from '../mappers/user-sequelize.mapper';
+import { UserModel } from '../models';
 
 @Injectable()
 export class UserSequelizeRepo implements IUserRepo {
   constructor(
     @InjectModel(UserModel) private readonly userModel: typeof UserModel,
-    private readonly userMapper: UserSequelizeMapper
+    private readonly userMapper: UserSequelizeMapper,
   ) {}
 
   async create(user: User): Promise<User> {
@@ -39,7 +39,7 @@ export class UserSequelizeRepo implements IUserRepo {
   async updateById(id: string, user: Partial<User>): Promise<User | null> {
     const [, updatedUser] = await this.userModel.update(user, {
       where: { id: Number(id) },
-      returning: true
+      returning: true,
     });
 
     return updatedUser ? this.userMapper.toDomain(updatedUser[0]) : null;
@@ -50,15 +50,15 @@ export class UserSequelizeRepo implements IUserRepo {
   }
 
   async searchUsers(
-    query: IUserSearchParams
+    query: IUserSearchParams,
   ): Promise<IOffsetPaginationResult<User>> {
     const { page = 1, limit = 10 } = query;
 
     const { name, status, gender, address, createdAt } = JSON.parse(
-      query.filter || "{}"
+      query.filter || '{}',
     ) as IUserSearchFilter;
 
-    const { Op } = require("sequelize");
+    const { Op } = require('sequelize');
     const where: any = {};
     const include: any[] = [];
 
@@ -66,7 +66,7 @@ export class UserSequelizeRepo implements IUserRepo {
     if (name) {
       where[Op.or] = [
         { firstName: { [Op.iLike]: `%${name}%` } },
-        { lastName: { [Op.iLike]: `%${name}%` } }
+        { lastName: { [Op.iLike]: `%${name}%` } },
       ];
     }
 
@@ -83,12 +83,12 @@ export class UserSequelizeRepo implements IUserRepo {
     // Filter by createdAt
     if (createdAt) {
       const startOfDay = moment
-        .utc(createdAt, "YYYY-MM-DD")
-        .startOf("day")
+        .utc(createdAt, 'YYYY-MM-DD')
+        .startOf('day')
         .toDate();
       const endOfDay = moment
-        .utc(createdAt, "YYYY-MM-DD")
-        .endOf("day")
+        .utc(createdAt, 'YYYY-MM-DD')
+        .endOf('day')
         .toDate();
       where.createdAt = { [Op.between]: [startOfDay, endOfDay] };
     }
@@ -96,9 +96,9 @@ export class UserSequelizeRepo implements IUserRepo {
     // Filter by country (join Address)
     if (address?.country) {
       include.push({
-        association: "address",
+        association: 'address',
         where: { country: address.country.toUpperCase() },
-        required: true
+        required: true,
       });
     }
 
@@ -107,7 +107,7 @@ export class UserSequelizeRepo implements IUserRepo {
       where,
       include,
       offset: (page - 1) * limit,
-      limit
+      limit,
     });
 
     return {
@@ -115,7 +115,7 @@ export class UserSequelizeRepo implements IUserRepo {
       totalRecords: count,
       totalPages: Math.ceil(count / limit),
       limit: +limit,
-      page: +page
+      page: +page,
     };
   }
 }

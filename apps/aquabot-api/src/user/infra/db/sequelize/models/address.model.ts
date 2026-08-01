@@ -1,3 +1,4 @@
+import { IAddress } from '@aquabot/shared/contract';
 import {
   AllowNull,
   AutoIncrement,
@@ -6,11 +7,10 @@ import {
   Model,
   PrimaryKey,
   Table,
-} from "sequelize-typescript";
-import { IAddress } from "../../../../contracts";
+} from 'sequelize-typescript';
 
 @Table({
-  tableName: "addresses",
+  tableName: 'addresses',
   timestamps: true,
 })
 export class AddressModel extends Model<IAddress> {

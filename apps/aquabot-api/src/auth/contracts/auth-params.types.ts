@@ -1,6 +1,10 @@
+import {
+  ILoginUserRequest,
+  IRegisterUserRequest,
+  IUser,
+  Provider,
+} from '@aquabot/shared/contract';
 import { IClientRequestInfo } from '../../common/interfaces';
-import { IUser, Provider } from '../../user/contracts';
-import { ILoginUserRequest, IRegisterUserRequest } from './auth.types';
 
 export interface IRefreshTokenParams {
   jti: string;

@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { UserService } from "../../../user/application/services";
-import { ILoggedInUserResult, IUserLoginParams } from "../../contracts";
-import { UnauthorizedError } from "../../errors";
-import { IssueTokensUseCase } from "./issue-tokens.use-case";
+import { ILoggedInUserResult } from '@aquabot/shared/contract';
+import { Injectable } from '@nestjs/common';
+import { UserService } from '../../../user/application/services';
+import { IUserLoginParams } from '../../contracts';
+import { UnauthorizedError } from '../../errors';
+import { IssueTokensUseCase } from './issue-tokens.use-case';
 
 @Injectable()
 export class LoginUserUseCase {
@@ -10,7 +11,7 @@ export class LoginUserUseCase {
 
   constructor(
     private readonly userService: UserService,
-    private readonly issueTokensUseCase: IssueTokensUseCase
+    private readonly issueTokensUseCase: IssueTokensUseCase,
   ) {}
 
   async execute(params: IUserLoginParams): Promise<ILoggedInUserResult> {
@@ -18,20 +19,20 @@ export class LoginUserUseCase {
 
     const user = await this.userService.validateByEmailAndPassword(
       email,
-      password
+      password,
     );
 
     if (!user) {
-      throw new UnauthorizedError("Email or password is incorrect.");
+      throw new UnauthorizedError('Email or password is incorrect.');
     }
 
     const issuedTokens = await this.issueTokensUseCase.execute({
-      user
+      user,
     });
 
     return {
       user,
-      ...issuedTokens
+      ...issuedTokens,
     };
   }
 }

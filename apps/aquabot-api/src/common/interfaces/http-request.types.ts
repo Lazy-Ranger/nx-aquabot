@@ -1,5 +1,5 @@
-import { Request } from "express";
-import { IPrincipal } from "./principal.types";
+import { Request } from 'express';
+import { IPrincipal } from './principal.types';
 
 export interface IUserAgent {
   browser: string;
@@ -14,7 +14,7 @@ export interface IClientRequestInfo {
 }
 
 export interface IHttpRequest<TUser = IPrincipal>
-  extends Omit<Request, "user"> {
+  extends Omit<Request, 'user'> {
   userAgent: IUserAgent;
   clientRequestInfo: IClientRequestInfo;
   user: TUser;

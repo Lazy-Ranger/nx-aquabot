@@ -1,8 +1,11 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { IOffsetPaginationResult, IUserSearchParams } from "../../contracts";
-import { User } from "../../domain/entities";
-import { IUserRepo } from "../../domain/repos";
-import { USER_REPO } from "../../tokens";
+import {
+  IOffsetPaginationResult,
+  IUserSearchParams,
+} from '@aquabot/shared/contract';
+import { Inject, Injectable } from '@nestjs/common';
+import { User } from '../../domain/entities';
+import { IUserRepo } from '../../domain/repos';
+import { USER_REPO } from '../../tokens';
 
 @Injectable()
 export class SearchUsersUseCase {

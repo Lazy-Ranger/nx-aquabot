@@ -1,5 +1,5 @@
 {
-  "name": "aquboat-server-errors",
+  "name": "errors",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/aquabot/server/errors/src",
   "projectType": "library",

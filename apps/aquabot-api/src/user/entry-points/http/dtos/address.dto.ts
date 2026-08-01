@@ -1,4 +1,9 @@
-import { PartialType } from "@nestjs/mapped-types";
+import {
+  COUNTRY,
+  IAddressCreateParams,
+  IAddressUpdateParams,
+} from '@aquabot/shared/contract';
+import { PartialType } from '@nestjs/mapped-types';
 import {
   IsIn,
   IsNotEmpty,
@@ -6,12 +11,7 @@ import {
   IsString,
   MaxLength,
   MinLength,
-} from "class-validator";
-import {
-  COUNTRY,
-  IAddressCreateParams,
-  IAddressUpdateParams,
-} from "../../../contracts";
+} from 'class-validator';
 
 export class CreateAddressDto implements IAddressCreateParams {
   @IsString()

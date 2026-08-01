@@ -1,29 +1,29 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { JwtService } from "@nestjs/jwt";
-import { randomUUID } from "crypto";
-import { StringValue } from "ms";
-import { JwtConfig } from "../../../config/jwt.config";
-import { IUser } from "../../../user/contracts";
 import {
-  IIssueTokensParams,
   IJwtAccessTokenPayload,
   IJwtIdTokenPayload,
   IJwtRefreshTokenPayload,
-  IssueTokenResponse
-} from "../../contracts";
+  IssueTokenResponse,
+  IUser,
+} from '@aquabot/shared/contract';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { randomUUID } from 'crypto';
+import { StringValue } from 'ms';
+import { JwtConfig } from '../../../config/jwt.config';
+import { IIssueTokensParams } from '../../contracts';
 
 @Injectable()
 export class IssueTokensUseCase {
   constructor(
     private jwtService: JwtService,
-    private readonly config: ConfigService<JwtConfig>
+    private readonly config: ConfigService<JwtConfig>,
   ) {}
 
   private createAccessTokenPayload(user: IUser): IJwtAccessTokenPayload {
     return {
       sub: user.id,
-      email: user.email
+      email: user.email,
     };
   }
 
@@ -36,14 +36,14 @@ export class IssueTokensUseCase {
       name: user.name,
       firstName: user.firstName,
       lastName: user.lastName,
-      gender: user.gender
+      gender: user.gender,
     };
   }
 
   private createRefreshTokenPayload(user: IUser): IJwtRefreshTokenPayload {
     return {
       sub: user.id,
-      email: user.email
+      email: user.email,
     };
   }
 
@@ -57,21 +57,21 @@ export class IssueTokensUseCase {
     const refreshTokenPayload = this.createRefreshTokenPayload(user);
 
     const jti = randomUUID();
-    const iss = this.config.getOrThrow<string>("jwt.issuer");
-    const aud = this.config.getOrThrow<string[]>("jwt.audience");
+    const iss = this.config.getOrThrow<string>('jwt.issuer');
+    const aud = this.config.getOrThrow<string[]>('jwt.audience');
 
     const accessTokenSecret = this.config.getOrThrow<string>(
-      "jwt.accessTokenSecret"
+      'jwt.accessTokenSecret',
     );
     const accessTokenExpireTime = this.config.getOrThrow<StringValue>(
-      "jwt.accessTokenExpireTime"
+      'jwt.accessTokenExpireTime',
     );
 
     const refreshTokenSecret = this.config.getOrThrow<string>(
-      "jwt.refreshTokenSecret"
+      'jwt.refreshTokenSecret',
     );
     const refreshTokenExpireTime = this.config.getOrThrow<StringValue>(
-      "jwt.refreshTokenExpireTime"
+      'jwt.refreshTokenExpireTime',
     );
 
     const accessToken = await this.jwtService.signAsync(
@@ -79,12 +79,12 @@ export class IssueTokensUseCase {
         ...accessTokenPayload,
         jti,
         iss,
-        aud
+        aud,
       },
       {
         secret: accessTokenSecret,
-        expiresIn: accessTokenExpireTime
-      }
+        expiresIn: accessTokenExpireTime,
+      },
     );
 
     const idToken = await this.jwtService.signAsync(
@@ -92,12 +92,12 @@ export class IssueTokensUseCase {
         ...idTokenPayload,
         jti,
         iss,
-        aud
+        aud,
       },
       {
         secret: accessTokenSecret,
-        expiresIn: accessTokenExpireTime
-      }
+        expiresIn: accessTokenExpireTime,
+      },
     );
 
     const refreshToken = await this.jwtService.signAsync(
@@ -105,19 +105,19 @@ export class IssueTokensUseCase {
         ...refreshTokenPayload,
         jti,
         iss,
-        aud
+        aud,
       },
       {
         secret: refreshTokenSecret,
-        expiresIn: refreshTokenExpireTime
-      }
+        expiresIn: refreshTokenExpireTime,
+      },
     );
 
     return {
       accessToken,
       idToken,
       refreshToken,
-      jti
+      jti,
     };
   }
 }

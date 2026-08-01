@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'aquboat-server-errors',
+  displayName: 'errors',
   preset: '../../../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

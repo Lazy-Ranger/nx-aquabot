@@ -1,5 +1,5 @@
-import { IAddress, IAddressUpdateParams } from "./address.types";
-import { Gender, Provider, RetrieveUserBy, UserStatus } from "./user.constants";
+import { IAddress, IAddressUpdateParams } from './address.types';
+import { Gender, Provider, RetrieveUserBy, UserStatus } from './user.constants';
 
 export interface IUser {
   id: string;
@@ -21,17 +21,17 @@ export interface IUser {
 
 export type IUserSearchFilter = Pick<
   Partial<IUser>,
-  "name" | "status" | "gender" | "address" | "createdAt"
+  'name' | 'status' | 'gender' | 'address' | 'createdAt'
 >;
 
 export type IUserCreateParams = Omit<
   IUser,
-  "id" | "name" | "status" | "createdAt" | "updatedAt" | "authId"
+  'id' | 'name' | 'status' | 'createdAt' | 'updatedAt' | 'authId'
 > & {
   password?: string;
 };
 
-export type IUserUpdateParams = Partial<Omit<IUserCreateParams, "address">> & {
+export type IUserUpdateParams = Partial<Omit<IUserCreateParams, 'address'>> & {
   address?: IAddressUpdateParams;
 };
 

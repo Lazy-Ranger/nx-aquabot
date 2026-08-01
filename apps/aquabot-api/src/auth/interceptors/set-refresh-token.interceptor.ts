@@ -1,12 +1,12 @@
+import { ILoggedInResponse } from '@aquabot/shared/contract';
 import {
   CallHandler,
   ExecutionContext,
   Injectable,
-  NestInterceptor
-} from "@nestjs/common";
-import { Observable, tap } from "rxjs";
-import { RefreshTokenService } from "../application/services/refresh-token.service";
-import { ILoggedInResponse } from "../contracts";
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable, tap } from 'rxjs';
+import { RefreshTokenService } from '../application/services/refresh-token.service';
 
 @Injectable()
 export class SetRefreshTokenInterceptor implements NestInterceptor {
@@ -19,8 +19,8 @@ export class SetRefreshTokenInterceptor implements NestInterceptor {
       .handle()
       .pipe(
         tap((data: ILoggedInResponse) =>
-          this.refreshTokenService.setRefreshToken(data.refreshToken, response)
-        )
+          this.refreshTokenService.setRefreshToken(data.refreshToken, response),
+        ),
       );
   }
 }

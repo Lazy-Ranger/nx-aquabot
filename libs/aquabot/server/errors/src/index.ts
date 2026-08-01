@@ -1,1 +1,1 @@
-export * from './lib/aquboat-server-errors';
+export * from './lib/errors';

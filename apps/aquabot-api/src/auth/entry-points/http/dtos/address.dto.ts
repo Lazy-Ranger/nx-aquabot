@@ -1,17 +1,17 @@
-import { PartialType } from "@nestjs/mapped-types";
+import {
+  COUNTRY,
+  ICreateAddressRequest,
+  IUpdateAddressRequest,
+} from '@aquabot/shared/contract';
+import { PartialType } from '@nestjs/mapped-types';
 import {
   IsIn,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
-  MinLength
-} from "class-validator";
-import {
-  COUNTRY,
-  ICreateAddressRequest,
-  IUpdateAddressRequest
-} from "../../../../user/contracts";
+  MinLength,
+} from 'class-validator';
 
 export class CreateAddressDto implements ICreateAddressRequest {
   @IsString()

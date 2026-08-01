@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
-import { IAddress } from "../../../../contracts";
+import { IAddress } from '@aquabot/shared/contract';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export type AddressDocument = HydratedDocument<AddressSchema>;
 

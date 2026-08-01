@@ -1,6 +1,6 @@
-import { IUser } from "../../contracts";
-import { User } from "../../domain/entities";
-import { AddressMapper } from "./address.mapper";
+import { IUser } from '@aquabot/shared/contract';
+import { User } from '../../domain/entities';
+import { AddressMapper } from './address.mapper';
 
 export class UserMapper {
   static toDto(user: User): IUser {
@@ -19,7 +19,7 @@ export class UserMapper {
       updatedAt: user.updatedAt,
       provider: user.provider,
       providerUserId: user.providerUserId,
-      authId: user.authId
+      authId: user.authId,
     };
   }
 

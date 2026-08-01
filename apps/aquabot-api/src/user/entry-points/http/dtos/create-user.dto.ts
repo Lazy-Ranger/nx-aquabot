@@ -1,4 +1,5 @@
-import { Type } from "class-transformer";
+import { Gender, IUserCreateParams, Provider } from '@aquabot/shared/contract';
+import { Type } from 'class-transformer';
 import {
   IsEmail,
   IsEnum,
@@ -11,9 +12,8 @@ import {
   MaxLength,
   MinLength,
   ValidateNested,
-} from "class-validator";
-import { Gender, IUserCreateParams, Provider } from "../../../contracts";
-import { CreateAddressDto } from "./address.dto";
+} from 'class-validator';
+import { CreateAddressDto } from './address.dto';
 
 export class CreateUserDto implements IUserCreateParams {
   @IsString()
