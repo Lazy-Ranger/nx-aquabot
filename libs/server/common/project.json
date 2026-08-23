@@ -1,0 +1,9 @@
+{
+  "name": "org-server-common",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/server/common/src",
+  "projectType": "library",
+  "tags": ["type:lib"],
+  "// targets": "to see all targets run: nx show project org-server-common --web",
+  "targets": {}
+}

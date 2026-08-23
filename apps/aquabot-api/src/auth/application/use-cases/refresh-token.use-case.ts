@@ -1,10 +1,9 @@
-import { IssueTokenResponse } from '@aquabot/shared/contract';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { IRefreshTokenParams } from '../../../../src/auth/contracts/auth-params.types';
 import { IPrincipal } from '../../../../src/common/interfaces';
 import { PlatformConfig } from '../../../../src/config/platform.config';
 import { UserService } from '../../../user/application/services';
+import { IRefreshTokenParams, IssueTokenResponse } from '../../contracts';
 import { SessionService } from '../services/session.service';
 import { IssueTokensUseCase } from './issue-tokens.use-case';
 

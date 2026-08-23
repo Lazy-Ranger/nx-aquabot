@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ICacheService } from '../../../application/ports/cache.port';
 import { JwtConfig } from '../../../config/jwt.config';
 import { CACHE_SERVICE } from '../../../tokens';
-import { ISessionCreateParams } from '../../contracts';
+import { ISessionCreateParams } from '../../contracts/session.type';
 import { Session } from '../../domain/entities';
 import { ISessionRepo } from '../../domain/repos';
 import { SESSION_REPO } from '../../tokens';

@@ -1,17 +1,17 @@
-import {
-  IJwtAccessTokenPayload,
-  IJwtIdTokenPayload,
-  IJwtRefreshTokenPayload,
-  IssueTokenResponse,
-  IUser,
-} from '@aquabot/shared/contract';
+import { IUser } from '@aquabot/shared/contracts';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { randomUUID } from 'crypto';
 import { StringValue } from 'ms';
 import { JwtConfig } from '../../../config/jwt.config';
-import { IIssueTokensParams } from '../../contracts';
+import {
+  IIssueTokensParams,
+  IJwtAccessTokenPayload,
+  IJwtIdTokenPayload,
+  IJwtRefreshTokenPayload,
+  IssueTokenResponse,
+} from '../../contracts';
 
 @Injectable()
 export class IssueTokensUseCase {

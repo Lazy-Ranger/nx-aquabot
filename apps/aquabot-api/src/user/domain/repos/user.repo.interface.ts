@@ -1,7 +1,5 @@
-import {
-  IOffsetPaginationResult,
-  IUserSearchParams,
-} from '@aquabot/shared/contract';
+import { IUserSearchParams } from '@aquabot/shared/contracts';
+import { IOffsetPaginationResult } from '@org/utils/pagination';
 import { User } from '../entities';
 
 export interface IUserRepo {

@@ -2,7 +2,7 @@ import {
   COUNTRY,
   IAddressCreateParams,
   IAddressUpdateParams,
-} from '@aquabot/shared/contract';
+} from '@aquabot/shared/contracts';
 import { PartialType } from '@nestjs/mapped-types';
 import {
   IsIn,

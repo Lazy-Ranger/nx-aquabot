@@ -1,4 +1,4 @@
-import { IUserSearchParams } from '@aquabot/shared/contract';
+import { IUserSearchParams } from '@aquabot/shared/contracts';
 import { Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 

@@ -2,7 +2,7 @@ import {
   IUser,
   IUserCreateParams,
   RetrieveUserBy,
-} from '@aquabot/shared/contract';
+} from '@aquabot/shared/contracts';
 import { Injectable } from '@nestjs/common';
 import { UserNotFoundError } from '../../../../src/user/errors';
 import { UserMapper } from '../mappers';

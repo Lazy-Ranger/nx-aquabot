@@ -1,4 +1,15 @@
-import { HttpStatus } from "@nestjs/common";
+export enum HttpStatus {
+  OK = 200,
+  NOT_FOUND = 404,
+  UNAUTHORIZED = 401,
+  CONFLICT = 409,
+  BAD_REQUEST = 400,
+  INTERNAL_SERVER_ERROR = 500,
+  GATEWAY_TIMEOUT = 504,
+  NO_CONTENT = 204,
+  METHOD_NOT_ALLOWED = 405,
+  FORBIDDEN = 403,
+}
 
 export enum ErrorReason {
   NOT_FOUND = "NOT_FOUND",
@@ -14,7 +25,7 @@ export enum ErrorReason {
   UNPROCESSABLE = "UNPROCESSABLE",
   INTERNAL = "INTERNAL",
   BAD_REQUEST = "BAD_REQUEST",
-  METHOD_NOT_ALLOWED = "METHOD_NOT_ALLOWED"
+  METHOD_NOT_ALLOWED = "METHOD_NOT_ALLOWED",
 }
 
 export enum ErrorCode {
@@ -29,7 +40,7 @@ export enum ErrorCode {
   TIMEOUT = "TIMEOUT",
   NO_CONTENT = "NO_CONTENT",
   UNKNOWN = "UNKNOWN",
-  CONFLICT = "CONFLICT"
+  CONFLICT = "CONFLICT",
 }
 
 export const ErrorCodeHttpCodeMap = {
@@ -43,7 +54,7 @@ export const ErrorCodeHttpCodeMap = {
   [ErrorCode.METHOD_NOT_ALLOWED]: HttpStatus.METHOD_NOT_ALLOWED,
   [ErrorCode.TIMEOUT]: HttpStatus.GATEWAY_TIMEOUT,
   [ErrorCode.INTERNAL]: HttpStatus.INTERNAL_SERVER_ERROR,
-  [ErrorCode.UNKNOWN]: HttpStatus.INTERNAL_SERVER_ERROR
+  [ErrorCode.UNKNOWN]: HttpStatus.INTERNAL_SERVER_ERROR,
 };
 
 export const HttpStatusCodeErrorCodeMap = {
@@ -55,5 +66,5 @@ export const HttpStatusCodeErrorCodeMap = {
   [405]: ErrorCode.METHOD_NOT_ALLOWED,
   [409]: ErrorCode.CONFLICT,
   [500]: ErrorCode.INTERNAL,
-  [504]: ErrorCode.TIMEOUT
+  [504]: ErrorCode.TIMEOUT,
 };

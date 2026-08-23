@@ -1,4 +1,4 @@
-import { IAddress } from '@aquabot/shared/contract';
+import { IAddress } from '@aquabot/shared/contracts';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 

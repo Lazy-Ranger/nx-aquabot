@@ -1,4 +1,4 @@
-import { Provider } from '@aquabot/shared/contract';
+import { Provider } from '@aquabot/shared/contracts';
 import {
   Body,
   Controller,
@@ -8,8 +8,8 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { HttpExceptionFilter } from '@org/server/common';
 import { Principal } from '../../../../common/decorators/principal.decorator';
-import { HttpExceptionFilter } from '../../../../common/exception-filters/http-exception.filter';
 import { IHttpRequest, IPrincipal } from '../../../../common/interfaces';
 import { AuthService } from '../../../application/services/auth.service';
 import {

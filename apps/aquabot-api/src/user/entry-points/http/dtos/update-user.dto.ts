@@ -1,4 +1,4 @@
-import { IUserUpdateParams } from '@aquabot/shared/contract';
+import { IUserUpdateParams } from '@aquabot/shared/contracts';
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateUserDto } from './create-user.dto';
 

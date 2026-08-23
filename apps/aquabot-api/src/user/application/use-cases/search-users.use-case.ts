@@ -1,8 +1,6 @@
-import {
-  IOffsetPaginationResult,
-  IUserSearchParams,
-} from '@aquabot/shared/contract';
+import { IUserSearchParams } from '@aquabot/shared/contracts';
 import { Inject, Injectable } from '@nestjs/common';
+import { IOffsetPaginationResult } from '@org/utils/pagination';
 import { User } from '../../domain/entities';
 import { IUserRepo } from '../../domain/repos';
 import { USER_REPO } from '../../tokens';

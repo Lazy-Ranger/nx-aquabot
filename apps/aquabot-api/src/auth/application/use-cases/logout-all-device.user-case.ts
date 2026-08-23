@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IPrincipal } from '../../../common/interfaces';
 import { UserService } from '../../../user/application/services';
 import { SessionService } from '../../application/services/session.service';
-import { IUserLogoutAllDeviceParams } from '../../contracts/auth-params.types';
+import { IUserLogoutAllDeviceParams } from '../../contracts';
 
 @Injectable()
 export class LogoutUserAllDeviceUseCase {

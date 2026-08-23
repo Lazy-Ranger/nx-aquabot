@@ -1,4 +1,4 @@
-import { IUserRetrieveParams, RetrieveUserBy } from '@aquabot/shared/contract';
+import { IUserRetrieveParams, RetrieveUserBy } from '@aquabot/shared/contracts';
 import {
   Body,
   Controller,

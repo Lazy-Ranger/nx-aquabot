@@ -1,4 +1,4 @@
-import { IUserDeleteResult, RetrieveUserBy } from '@aquabot/shared/contract';
+import { IUserDeleteResult, RetrieveUserBy } from '@aquabot/shared/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { IUserRepo } from '../../domain/repos';
 import { USER_REPO } from '../../tokens';

@@ -1,9 +1,9 @@
-import { IUserAccessTokenClaim } from '@aquabot/shared/contract';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { JwtConfig } from '../../config/jwt.config';
+import { IUserAccessTokenClaim } from '../contracts';
 import { Strategy as JwtStrategy } from './strategies.constants';
 
 @Injectable()

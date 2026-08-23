@@ -1,4 +1,4 @@
-import { RetrieveUserBy } from '@aquabot/shared/contract';
+import { RetrieveUserBy } from '@aquabot/shared/contracts';
 import { ErrorCode, ResourceInfo } from '../../common/errors';
 import { UserResource } from '../../common/resources';
 import { buildResourcePathTemplate } from '../../common/resources/resource.utilts';

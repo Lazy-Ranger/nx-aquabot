@@ -1,4 +1,4 @@
-import { ILoggedInResponse } from '@aquabot/shared/contract';
+import { ILoggedInResponse } from '@aquabot/shared/contracts';
 import {
   CallHandler,
   ExecutionContext,

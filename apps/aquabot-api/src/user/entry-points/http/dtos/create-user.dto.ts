@@ -1,4 +1,4 @@
-import { Gender, IUserCreateParams, Provider } from '@aquabot/shared/contract';
+import { Gender, IUserCreateParams, Provider } from '@aquabot/shared/contracts';
 import { Type } from 'class-transformer';
 import {
   IsEmail,

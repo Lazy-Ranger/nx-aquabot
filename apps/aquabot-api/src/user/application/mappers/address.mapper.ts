@@ -1,4 +1,4 @@
-import { IAddress } from '@aquabot/shared/contract';
+import { IAddress } from '@aquabot/shared/contracts';
 import { Address } from '../../domain/value-objects/address.vo';
 
 export class AddressMapper {

@@ -1,5 +1,5 @@
-import { IUserAgent } from "../../../common/interfaces";
-import { ISession } from "../../contracts";
+import { IUserAgent } from '../../../common/interfaces';
+import { ISession } from '../../contracts';
 
 export class Session implements ISession {
   readonly id: string;

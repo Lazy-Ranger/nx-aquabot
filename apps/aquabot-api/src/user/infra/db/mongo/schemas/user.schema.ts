@@ -1,4 +1,4 @@
-import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contract';
+import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contracts';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { UserResource } from '../../../../../common/resources';

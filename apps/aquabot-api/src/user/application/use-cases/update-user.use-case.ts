@@ -1,4 +1,4 @@
-import { IUserUpdateParams, RetrieveUserBy } from '@aquabot/shared/contract';
+import { IUserUpdateParams, RetrieveUserBy } from '@aquabot/shared/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from '../../domain/entities';
 import { IUserRepo } from '../../domain/repos';

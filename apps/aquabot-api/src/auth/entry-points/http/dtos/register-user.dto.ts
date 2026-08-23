@@ -1,4 +1,4 @@
-import { Gender, IRegisterUserRequest } from '@aquabot/shared/contract';
+import { Gender } from '@aquabot/shared/contracts';
 import { Type } from 'class-transformer';
 import {
   IsEmail,
@@ -13,6 +13,7 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
+import { IRegisterUserRequest } from '../../../contracts';
 import { CreateAddressDto } from './address.dto';
 
 export class RegisterUserDto implements IRegisterUserRequest {

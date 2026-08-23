@@ -1,4 +1,4 @@
-import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contract';
+import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contracts';
 import * as bcrypt from 'bcrypt';
 import { generateId } from '../../../helpers';
 import { Address } from '../value-objects/address.vo';

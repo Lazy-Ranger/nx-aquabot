@@ -14,10 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@aquabot/shared/contract": [
-        "./libs/aquabot/shared/contract/src/index.ts"
+      "@aquabot/server/errors": ["./libs/aquabot/server/errors/src/index.ts"],
+      "@aquabot/shared/contracts": [
+        "./libs/aquabot/shared/contracts/src/index.ts"
       ],
-      "@aquabot/server/errors": ["./libs/aquabot/server/errors/src/index.ts"]
+      "@org/utils/pagination": ["./libs/shared/pagination/src/index.ts"],
+      "@org/server/core": ["./libs/server/core/src/index.ts"],
+      "@org/server/exceptions": ["./libs/server/exceptions/src/index.ts"],
+      "@org/utils/codes": ["./libs/shared/codes/src/index.ts"],
+      "@org/server/common": ["./libs/server/common/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

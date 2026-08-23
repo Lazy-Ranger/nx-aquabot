@@ -1,4 +1,4 @@
-import { IUser } from '@aquabot/shared/contract';
+import { IUser } from '@aquabot/shared/contracts';
 import { User } from '../../domain/entities';
 import { AddressMapper } from './address.mapper';
 

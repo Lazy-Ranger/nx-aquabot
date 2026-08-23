@@ -1,4 +1,4 @@
-import { IUser } from '@aquabot/shared/contract';
+import { IUser } from '@aquabot/shared/contracts';
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../../../user/application/services';
 import { UserAlreadyExistsError } from '../../../user/errors';

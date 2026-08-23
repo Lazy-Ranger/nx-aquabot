@@ -1,4 +1,4 @@
-import { OneOfPrincipalClaim } from '@aquabot/shared/contract';
+import { OneOfPrincipalClaim } from '../../auth/contracts';
 
 export interface IPrincipal<TClaim = OneOfPrincipalClaim> {
   id: string; // user.id | service.id | jwt.sub

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IUserLogoutParams } from '../../../auth/contracts';
 import { IPrincipal } from '../../../common/interfaces';
 import { SessionService } from '../../application/services/session.service';
+import { IUserLogoutParams } from '../../contracts';
 
 @Injectable()
 export class LogoutUserUseCase {

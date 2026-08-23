@@ -1,4 +1,4 @@
-import { ILoginUserRequest } from '@aquabot/shared/contract';
+import { ILoginUserRequest } from '@aquabot/shared/contracts';
 import {
   IsEmail,
   IsNotEmpty,

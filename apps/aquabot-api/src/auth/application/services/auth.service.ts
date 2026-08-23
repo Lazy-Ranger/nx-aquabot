@@ -1,17 +1,14 @@
+import { ILoggedInResponse, IUser } from '@aquabot/shared/contracts';
+
 import {
-  ILoggedInResponse,
-  IssueTokenResponse,
-  IUser,
-} from '@aquabot/shared/contract';
-import { Injectable } from '@nestjs/common';
-import { IClientRequestInfo } from '../../../common/interfaces';
-import {
-  // ILoggedInResponse,
   ISessionCreateParams,
-  // IssueTokenResponse,
+  IssueTokenResponse,
   IUserLoginParams,
   IUserRegisterParams,
 } from '../../contracts';
+
+import { Injectable } from '@nestjs/common';
+import { IClientRequestInfo } from '../../../common/interfaces';
 import {
   IssueTokensUseCase,
   LoginUserUseCase,

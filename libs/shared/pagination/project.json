@@ -1,0 +1,9 @@
+{
+  "name": "org-shared-pagination",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/pagination/src",
+  "projectType": "library",
+  "tags": ["type:lib", "context:shared"],
+  "// targets": "to see all targets run: nx show project org-shared-pagination --web",
+  "targets": {}
+}

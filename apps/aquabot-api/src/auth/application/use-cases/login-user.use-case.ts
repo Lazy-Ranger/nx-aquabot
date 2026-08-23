@@ -1,7 +1,6 @@
-import { ILoggedInUserResult } from '@aquabot/shared/contract';
 import { Injectable } from '@nestjs/common';
+import { ILoggedInUserResult, IUserLoginParams } from '../../../auth/contracts';
 import { UserService } from '../../../user/application/services';
-import { IUserLoginParams } from '../../contracts';
 import { UnauthorizedError } from '../../errors';
 import { IssueTokensUseCase } from './issue-tokens.use-case';
 

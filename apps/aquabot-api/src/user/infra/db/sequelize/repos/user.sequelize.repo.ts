@@ -1,10 +1,10 @@
 import {
-  IOffsetPaginationResult,
   IUserSearchFilter,
   IUserSearchParams,
-} from '@aquabot/shared/contract';
+} from '@aquabot/shared/contracts';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { IOffsetPaginationResult } from '@org/utils/pagination';
 import moment from 'moment';
 import { User } from '../../../../domain/entities';
 import { IUserRepo } from '../../../../domain/repos';
