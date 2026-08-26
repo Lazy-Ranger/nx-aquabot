@@ -1,9 +1,9 @@
-import { IUserRetrieveParams, RetrieveUserBy } from '@aquabot/shared/contracts';
-import { Inject, Injectable } from '@nestjs/common';
-import { User } from '../../domain/entities';
-import { IUserRepo } from '../../domain/repos';
-import { UserNotFoundError } from '../../errors';
-import { USER_REPO } from '../../tokens';
+import { UserNotFoundError } from "@aquabot/server/error";
+import { IUserRetrieveParams, RetrieveUserBy } from "@aquabot/shared/contracts";
+import { Inject, Injectable } from "@nestjs/common";
+import { User } from "../../domain/entities";
+import { IUserRepo } from "../../domain/repos";
+import { USER_REPO } from "../../tokens";
 
 @Injectable()
 export class RetrieveUserUseCase {

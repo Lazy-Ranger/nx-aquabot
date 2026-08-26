@@ -1,12 +1,12 @@
+import { UserNotFoundError } from "@aquabot/server/error";
 import {
   IUser,
   IUserCreateParams,
   RetrieveUserBy,
-} from '@aquabot/shared/contracts';
-import { Injectable } from '@nestjs/common';
-import { UserNotFoundError } from '../../../../src/user/errors';
-import { UserMapper } from '../mappers';
-import { CreateUserUseCase, RetrieveUserUseCase } from '../use-cases';
+} from "@aquabot/shared/contracts";
+import { Injectable } from "@nestjs/common";
+import { UserMapper } from "../mappers";
+import { CreateUserUseCase, RetrieveUserUseCase } from "../use-cases";
 
 @Injectable()
 export class UserService {

@@ -4,6 +4,6 @@ export const UserResource = {
   collectionName: "users",
 
   pathTemplate: {
-    DEFAULT: "users/{user_id}"
-  } as const
+    DEFAULT: "users/{user_id}",
+  } as const,
 } as const;

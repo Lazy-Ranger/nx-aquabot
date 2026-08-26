@@ -1,5 +1,5 @@
-import { ErrorCode } from '@org/shared/codes';
-import { ErrorDetail } from './errors-detail';
+import { ErrorCode } from "@org/utils/codes";
+import { ErrorDetail } from "./errors-detail";
 
 export class SerializedErrorResponse {
   public readonly code: number; // http|grpc code

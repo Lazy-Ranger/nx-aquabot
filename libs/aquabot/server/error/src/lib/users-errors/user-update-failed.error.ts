@@ -5,7 +5,7 @@ export class UserUpdateFailedError extends Error {
 
   constructor(
     public readonly id: string,
-    public readonly message: string = "User update failed.",
+    public override readonly message: string = "User update failed.",
   ) {
     super(message);
     this.description = `Cannot update user with id \`${id}\`.`;

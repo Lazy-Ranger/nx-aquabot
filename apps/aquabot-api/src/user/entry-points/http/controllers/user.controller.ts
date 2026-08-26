@@ -1,4 +1,4 @@
-import { IUserRetrieveParams, RetrieveUserBy } from '@aquabot/shared/contracts';
+import { IUserRetrieveParams, RetrieveUserBy } from "@aquabot/shared/contracts";
 import {
   Body,
   Controller,
@@ -8,18 +8,17 @@ import {
   Query,
   UseFilters,
   UseGuards,
-} from '@nestjs/common';
-import { JwtAccessTokenGuard } from '../../../../auth/guards/jwt-access-token.guard';
-import { HttpExceptionFilter } from '../../../../common/exception-filters/http-exception.filter';
+} from "@nestjs/common";
+import { HttpExceptionFilter } from "@org/server/common";
+import { JwtAccessTokenGuard } from "../../../../auth/guards/jwt-access-token.guard";
 import {
   RetrieveUserUseCase,
   SearchUsersUseCase,
   UpdateUserUseCase,
-} from '../../../application/use-cases';
-import { SearchUsersDto, UpdateUserDto } from '../dtos';
-import { UserHttpMapper } from '../mappers/user-http.mapper';
-
-@Controller('/users')
+} from "../../../application/use-cases";
+import { SearchUsersDto, UpdateUserDto } from "../dtos";
+import { UserHttpMapper } from "../mappers/user-http.mapper";
+@Controller("/users")
 @UseFilters(HttpExceptionFilter)
 @UseGuards(JwtAccessTokenGuard)
 export class UserController {
@@ -29,7 +28,7 @@ export class UserController {
     private readonly updateUserUC: UpdateUserUseCase,
   ) {}
 
-  @Get('search')
+  @Get("search")
   async getUsers(@Query() query: SearchUsersDto) {
     const paginationResult = await this.searchUsersUC.execute(query);
 
@@ -39,8 +38,8 @@ export class UserController {
     };
   }
 
-  @Get(':id')
-  async getUserById(@Param('id') id: string) {
+  @Get(":id")
+  async getUserById(@Param("id") id: string) {
     const userRetrieveParams: IUserRetrieveParams = {
       by: RetrieveUserBy.ID,
       value: id,
@@ -51,9 +50,9 @@ export class UserController {
     return UserHttpMapper.toDto(user);
   }
 
-  @Put(':id')
+  @Put(":id")
   async updateUser(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     const user = await this.updateUserUC.execute(id, updateUserDto);

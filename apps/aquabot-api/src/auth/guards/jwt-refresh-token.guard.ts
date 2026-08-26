@@ -1,12 +1,12 @@
-import { ExecutionContext, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
-import { ErrorReason } from '../../common/errors';
-import { PlatformConfig } from '../../config/platform.config';
-import { RefreshTokenService } from '../application/services/refresh-token.service';
-import { UnauthorizedError } from '../errors';
-import { Strategy } from '../strategies/strategies.constants';
+import { ExecutionContext, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { AuthGuard } from "@nestjs/passport";
+import { UnauthorizedError } from "@org/server/exceptions";
+import { ErrorReason } from "@org/utils/codes";
+import { Request } from "express";
+import { PlatformConfig } from "../../config/platform.config";
+import { RefreshTokenService } from "../application/services/refresh-token.service";
+import { Strategy } from "../strategies/strategies.constants";
 
 @Injectable()
 export class JwtRefreshTokenGuard extends AuthGuard(
@@ -15,8 +15,8 @@ export class JwtRefreshTokenGuard extends AuthGuard(
   private readonly domain: string;
 
   private readonly errorMetadata = {
-    location: 'Bearer',
-    locationType: 'header',
+    location: "Bearer",
+    locationType: "header",
   };
 
   constructor(
@@ -24,7 +24,7 @@ export class JwtRefreshTokenGuard extends AuthGuard(
     private readonly config: ConfigService<PlatformConfig>,
   ) {
     super();
-    this.domain = this.config.getOrThrow('platform.name');
+    this.domain = this.config.getOrThrow("platform.name");
   }
 
   async canActivate(context: ExecutionContext) {
@@ -34,7 +34,7 @@ export class JwtRefreshTokenGuard extends AuthGuard(
 
     if (!token || (await this.refreshTokenService.isTokenRevoked(token))) {
       throw new UnauthorizedError(
-        'Access token is invalid or expired.',
+        "Access token is invalid or expired.",
         ErrorReason.ACCESS_TOKEN_INVALID,
         this.domain,
         this.errorMetadata,
@@ -53,7 +53,7 @@ export class JwtRefreshTokenGuard extends AuthGuard(
 
   handleRequest(err, user, info) {
     if (err || !user) {
-      console.log('Error in JWT Refresh Token Guard:', err, info);
+      console.log("Error in JWT Refresh Token Guard:", err, info);
       // const unauthorizedError = new UnauthorizedError(err?.message);
 
       // throw new UnauthorizedException(unauthorizedError);

@@ -1,12 +1,12 @@
-import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contracts';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { UserResource } from '../../../../../common/resources';
-import { AddressDocument, AddressSchemaDef } from './address.schema';
+import { Gender, IUser, Provider, UserStatus } from "@aquabot/shared/contracts";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { UserResource } from "@org/utils/resources";
+import { HydratedDocument } from "mongoose";
+import { AddressDocument, AddressSchemaDef } from "./address.schema";
 
 export type UserDocument = HydratedDocument<UserSchema>;
 
-export interface IUserPersistence extends Omit<IUser, 'id' | 'name'> {
+export interface IUserPersistence extends Omit<IUser, "id" | "name"> {
   password?: string;
 }
 

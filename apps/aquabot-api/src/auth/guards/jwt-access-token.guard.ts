@@ -1,22 +1,22 @@
-import { ExecutionContext, Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
-import { ICacheService } from '../../application/ports/cache.port';
-import { ErrorReason } from '../../common/errors';
-import { PlatformConfig } from '../../config/platform.config';
-import { CACHE_SERVICE } from '../../tokens';
-import { SessionService } from '../application/services/session.service';
-import { UnauthorizedError } from '../errors';
-import { Strategy } from '../strategies/strategies.constants';
+import { ExecutionContext, Inject, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { AuthGuard } from "@nestjs/passport";
+import { UnauthorizedError } from "@org/server/exceptions";
+import { ErrorReason } from "@org/utils/codes";
+import { Request } from "express";
+import { ICacheService } from "../../application/ports/cache.port";
+import { PlatformConfig } from "../../config/platform.config";
+import { CACHE_SERVICE } from "../../tokens";
+import { SessionService } from "../application/services/session.service";
+import { Strategy } from "../strategies/strategies.constants";
 
 @Injectable()
 export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
   private readonly domain: string;
 
   private readonly errorMetadata = {
-    location: 'Bearer',
-    locationType: 'header',
+    location: "Bearer",
+    locationType: "header",
   };
 
   constructor(
@@ -26,7 +26,7 @@ export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
   ) {
     super();
 
-    this.domain = this.config.getOrThrow('platform.name');
+    this.domain = this.config.getOrThrow("platform.name");
   }
 
   async canActivate(context: ExecutionContext) {
@@ -41,7 +41,7 @@ export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
 
     if (isTokenRevoked) {
       throw new UnauthorizedError(
-        'Access token is invalid or expired.',
+        "Access token is invalid or expired.",
         ErrorReason.ACCESS_TOKEN_INVALID,
         this.domain,
         this.errorMetadata,

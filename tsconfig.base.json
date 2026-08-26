@@ -14,7 +14,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@aquabot/server/errors": ["./libs/aquabot/server/errors/src/index.ts"],
       "@aquabot/shared/contracts": [
         "./libs/aquabot/shared/contracts/src/index.ts"
       ],
@@ -22,7 +21,9 @@
       "@org/server/core": ["./libs/server/core/src/index.ts"],
       "@org/server/exceptions": ["./libs/server/exceptions/src/index.ts"],
       "@org/utils/codes": ["./libs/shared/codes/src/index.ts"],
-      "@org/server/common": ["./libs/server/common/src/index.ts"]
+      "@org/server/common": ["./libs/server/common/src/index.ts"],
+      "@org/utils/resources": ["./libs/shared/resources/src/index.ts"],
+      "@aquabot/server/error": ["./libs/aquabot/server/error/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

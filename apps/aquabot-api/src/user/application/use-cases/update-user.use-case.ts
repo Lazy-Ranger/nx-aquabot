@@ -1,10 +1,10 @@
-import { IUserUpdateParams, RetrieveUserBy } from '@aquabot/shared/contracts';
-import { Inject, Injectable } from '@nestjs/common';
-import { User } from '../../domain/entities';
-import { IUserRepo } from '../../domain/repos';
-import { UserUpdateFailedError } from '../../errors';
-import { USER_REPO } from '../../tokens';
-import { RetrieveUserUseCase } from './retrieve-user.use-case';
+import { UserUpdateFailedError } from "@aquabot/server/error";
+import { IUserUpdateParams, RetrieveUserBy } from "@aquabot/shared/contracts";
+import { Inject, Injectable } from "@nestjs/common";
+import { User } from "../../domain/entities";
+import { IUserRepo } from "../../domain/repos";
+import { USER_REPO } from "../../tokens";
+import { RetrieveUserUseCase } from "./retrieve-user.use-case";
 
 @Injectable()
 export class UpdateUserUseCase {
