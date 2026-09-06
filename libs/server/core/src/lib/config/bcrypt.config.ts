@@ -6,6 +6,6 @@ export interface BcryptConfig {
 
 export const BCRYPT_CONFIG = registerAs("bcrypt", () => {
   return {
-    salt: +(process.env.BCRYPT_SALT || "10")
+    salt: +(process.env["BCRYPT_SALT"] || "10"),
   };
 });

@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { MongooseOptionsFactory } from '@nestjs/mongoose';
-import { DatabaseConfig } from '../../../../src/config/database.config';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { MongooseOptionsFactory } from "@nestjs/mongoose";
+import { DatabaseConfig } from "@org/server/core";
 
 @Injectable()
 export class MongooseConfigService implements MongooseOptionsFactory {
@@ -9,7 +9,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
 
   createMongooseOptions() {
     return {
-      uri: this.config.get<string>('database.url'),
+      uri: this.config.get<string>("database.url"),
     };
   }
 }

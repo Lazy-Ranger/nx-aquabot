@@ -13,12 +13,12 @@ export interface AppConfig {
 }
 
 export const getAppConfig = () => {
-  const port = parseInt(process.env.APP_PORT || "3000");
+  const port = parseInt(process.env["APP_PORT"] || "3000");
 
   return {
     port,
-    env: process.env.NODE_ENV || "local",
-    host: process.env.APP_ENDPOINT || `http://localhost:${port}`,
+    env: process.env["NODE_ENV "] || "local",
+    host: process.env["APP_ENDPOINT"] || `http://localhost:${port}`,
     get isLocal() {
       return this.env === "local";
     },
@@ -30,7 +30,7 @@ export const getAppConfig = () => {
     },
     get isProd() {
       return this.env === "production";
-    }
+    },
   };
 };
 

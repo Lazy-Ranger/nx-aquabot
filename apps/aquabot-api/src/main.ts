@@ -2,12 +2,12 @@ import { ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { AppConfig, AppEnv } from "@org/server/core";
 import { BadRequest } from "@org/server/exceptions";
+import { userAgentMiddleware } from "@org/server/middlewares";
 import { ErrorCode } from "@org/utils/codes";
 import cookieParser from "cookie-parser";
 import { AppModule } from "./app.module";
-import { userAgentMiddleware } from "./common/middlewares/user-agent.middleware";
-import { AppConfig, AppEnv } from "./config/app.config";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);

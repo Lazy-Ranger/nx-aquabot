@@ -5,7 +5,10 @@ export function userAgentMiddleware() {
   return (req: Request, res: Response, next: NextFunction) => {
     const uaString = req.headers["user-agent"] || "";
     const ip =
-      req.ip || req.header["x-forwarded-for"] || req.socket.remoteAddress;
+      req.ip ||
+      req.headers["x-forwarded-for"] ||
+      req.socket.remoteAddress ||
+      "";
 
     const parser = new UAParser(uaString);
     const result = parser.getResult();
@@ -15,12 +18,12 @@ export function userAgentMiddleware() {
         `${result.browser.name || ""} ${result.browser.version || ""}`.trim(),
       os: `${result.os.name || ""} ${result.os.version || ""}`.trim(),
       device: result.device.model || "",
-      ua: result.ua
+      ua: result.ua,
     };
 
     req["clientRequestInfo"] = {
       ip,
-      userAgent: req["userAgent"]
+      userAgent: req["userAgent"],
     };
 
     next();

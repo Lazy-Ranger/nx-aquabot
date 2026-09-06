@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { RedisConfig } from "@org/server/core";
 import Redis from "ioredis";
 import { ICacheService } from "../../../application/ports/cache.port";
-import { RedisConfig } from "../../../config/redis.config";
 
 @Injectable()
 export class RedisService implements ICacheService {

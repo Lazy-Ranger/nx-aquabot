@@ -1,20 +1,20 @@
-import { ILoggedInResponse, IUser } from '@aquabot/shared/contracts';
+import { ILoggedInResponse, IUser } from "@aquabot/shared/contracts";
 
 import {
   ISessionCreateParams,
   IssueTokenResponse,
   IUserLoginParams,
   IUserRegisterParams,
-} from '../../contracts';
+} from "../../contracts";
 
-import { Injectable } from '@nestjs/common';
-import { IClientRequestInfo } from '../../../common/interfaces';
+import { Injectable } from "@nestjs/common";
+import { IClientRequestInfo } from "@org/server/common";
 import {
   IssueTokensUseCase,
   LoginUserUseCase,
   RegisterUserUseCase,
-} from '../use-cases';
-import { SessionService } from './session.service';
+} from "../use-cases";
+import { SessionService } from "./session.service";
 
 @Injectable()
 export class AuthService {

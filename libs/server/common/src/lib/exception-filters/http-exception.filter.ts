@@ -8,6 +8,7 @@ import {
 import { HttpAdapterHost } from "@nestjs/core";
 
 import { ConfigService } from "@nestjs/config";
+import { PlatformConfig } from "@org/server/core";
 import {
   BadRequest,
   ErrorDetail,
@@ -19,8 +20,6 @@ import {
   ErrorCodeHttpCodeMap,
   HttpStatusCodeErrorCodeMap,
 } from "@org/utils/codes";
-import { PlatformConfig } from "../Config";
-console.log("ErrorCodeHttpCodeMap", ErrorCodeHttpCodeMap);
 
 type CatchableError = ErrorDetail | HttpException | Error | unknown;
 

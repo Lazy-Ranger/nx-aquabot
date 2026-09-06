@@ -1,4 +1,4 @@
-import { getPlatformConfig } from "@org/server/common";
+import { getPlatformConfig } from "@org/server/core";
 import { ErrorCode, ErrorReason } from "@org/utils/codes";
 import { ErrorInfo } from "./error-Info";
 

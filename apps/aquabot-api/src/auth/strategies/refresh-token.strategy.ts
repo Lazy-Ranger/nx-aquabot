@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { IHttpRequest } from '../../common/interfaces';
-import { JwtConfig } from '../../config/jwt.config';
-import { RefreshTokenService } from '../application/services/refresh-token.service';
-import { IUserRefreshTokenClaim } from '../contracts';
-import { Strategy as JwtStrategy } from './strategies.constants';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { PassportStrategy } from "@nestjs/passport";
+import { IHttpRequest } from "@org/server/common";
+import { JwtConfig } from "@org/server/core";
+import { ExtractJwt, Strategy } from "passport-jwt";
+import { RefreshTokenService } from "../application/services/refresh-token.service";
+import { IUserRefreshTokenClaim } from "../contracts";
+import { Strategy as JwtStrategy } from "./strategies.constants";
 
 @Injectable()
 export class JwtRefreshAccessTokenStrategy extends PassportStrategy(
@@ -17,7 +17,7 @@ export class JwtRefreshAccessTokenStrategy extends PassportStrategy(
     configService: ConfigService<JwtConfig>,
     private readonly refreshTokenService: RefreshTokenService,
   ) {
-    const secret = configService.getOrThrow('jwt.refreshTokenSecret');
+    const secret = configService.getOrThrow("jwt.refreshTokenSecret");
 
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
@@ -25,8 +25,8 @@ export class JwtRefreshAccessTokenStrategy extends PassportStrategy(
       ]),
       ignoreExpiration: false,
       secretOrKey: secret,
-      issuer: configService.getOrThrow('jwt.issuer'),
-      audience: configService.getOrThrow('jwt.audience'),
+      issuer: configService.getOrThrow("jwt.issuer"),
+      audience: configService.getOrThrow("jwt.audience"),
     });
   }
 

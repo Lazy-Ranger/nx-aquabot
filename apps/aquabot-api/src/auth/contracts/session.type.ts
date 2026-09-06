@@ -1,4 +1,4 @@
-import { IUserAgent } from '../../common/interfaces';
+import { IUserAgent } from "@org/server/common";
 
 export interface ISession {
   id: string;

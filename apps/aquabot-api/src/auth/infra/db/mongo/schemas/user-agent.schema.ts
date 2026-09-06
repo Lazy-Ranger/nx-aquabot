@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { IUserAgent } from "@org/server/common";
 import { HydratedDocument } from "mongoose";
-import { IUserAgent } from "../../../../../common/interfaces";
 
 export type UserAgentDocument = HydratedDocument<IUserAgent>;
 
 @Schema({
-  _id: false
+  _id: false,
 })
 export class AuthUserAgent implements IUserAgent {
   @Prop({})

@@ -8,3 +8,5 @@ export interface ILoggedInResponse {
   idToken: string;
   refreshToken: string;
 }
+
+export type IRefreshTokenResponse = ILoggedInResponse;

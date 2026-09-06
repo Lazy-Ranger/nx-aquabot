@@ -1,17 +1,17 @@
-import { IUser } from '@aquabot/shared/contracts';
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import { randomUUID } from 'crypto';
-import { StringValue } from 'ms';
-import { JwtConfig } from '../../../config/jwt.config';
+import { IUser } from "@aquabot/shared/contracts";
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
+import { JwtConfig } from "@org/server/core";
+import { randomUUID } from "crypto";
+import { StringValue } from "ms";
 import {
   IIssueTokensParams,
   IJwtAccessTokenPayload,
   IJwtIdTokenPayload,
   IJwtRefreshTokenPayload,
   IssueTokenResponse,
-} from '../../contracts';
+} from "../../contracts";
 
 @Injectable()
 export class IssueTokensUseCase {
@@ -57,21 +57,21 @@ export class IssueTokensUseCase {
     const refreshTokenPayload = this.createRefreshTokenPayload(user);
 
     const jti = randomUUID();
-    const iss = this.config.getOrThrow<string>('jwt.issuer');
-    const aud = this.config.getOrThrow<string[]>('jwt.audience');
+    const iss = this.config.getOrThrow<string>("jwt.issuer");
+    const aud = this.config.getOrThrow<string[]>("jwt.audience");
 
     const accessTokenSecret = this.config.getOrThrow<string>(
-      'jwt.accessTokenSecret',
+      "jwt.accessTokenSecret",
     );
     const accessTokenExpireTime = this.config.getOrThrow<StringValue>(
-      'jwt.accessTokenExpireTime',
+      "jwt.accessTokenExpireTime",
     );
 
     const refreshTokenSecret = this.config.getOrThrow<string>(
-      'jwt.refreshTokenSecret',
+      "jwt.refreshTokenSecret",
     );
     const refreshTokenExpireTime = this.config.getOrThrow<StringValue>(
-      'jwt.refreshTokenExpireTime',
+      "jwt.refreshTokenExpireTime",
     );
 
     const accessToken = await this.jwtService.signAsync(

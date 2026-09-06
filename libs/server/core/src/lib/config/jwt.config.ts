@@ -17,13 +17,13 @@ export const getJwtConfig = () => {
   const platformConfig = getPlatformConfig();
 
   return {
-    accessTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET,
-    refreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET,
-    accessTokenExpireTime: process.env.JWT_ACCESS_TOKEN_EXPIRE_TIME,
-    refreshTokenExpireTime: process.env.JWT_REFRESH_TOKEN_EXPIRE_TIME,
+    accessTokenSecret: process.env["JWT_REFRESH_TOKEN_SECRET"],
+    refreshTokenSecret: process.env["JWT_REFRESH_TOKEN_SECRET"],
+    accessTokenExpireTime: process.env["JWT_ACCESS_TOKEN_EXPIRE_TIME"],
+    refreshTokenExpireTime: process.env["JWT_REFRESH_TOKEN_EXPIRE_TIME"],
     refreshTokenCookieName: `${platformConfig.name}-rt`, // <__secure-><org>-rt
-    issuer: process.env.JWT_ISSUER || appConfig.host,
-    audience: ["*"]
+    issuer: process.env["JWT_ISSUER "] || appConfig.host,
+    audience: ["*"],
   };
 };
 

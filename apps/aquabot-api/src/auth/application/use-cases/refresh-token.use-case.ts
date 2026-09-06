@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { IPrincipal } from '../../../../src/common/interfaces';
-import { PlatformConfig } from '../../../../src/config/platform.config';
-import { UserService } from '../../../user/application/services';
-import { IRefreshTokenParams, IssueTokenResponse } from '../../contracts';
-import { SessionService } from '../services/session.service';
-import { IssueTokensUseCase } from './issue-tokens.use-case';
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { IPrincipal } from "@org/server/common";
+import { PlatformConfig } from "@org/server/core";
+import { UserService } from "../../../user/application/services";
+import { IRefreshTokenParams, IssueTokenResponse } from "../../contracts";
+import { SessionService } from "../services/session.service";
+import { IssueTokensUseCase } from "./issue-tokens.use-case";
 
 @Injectable()
 export class RefreshTokensUseCase {
   private readonly domain: string;
 
   private readonly errorMetadata = {
-    location: 'Refresh',
-    locationType: 'Invalid credentials',
+    location: "Refresh",
+    locationType: "Invalid credentials",
   };
   constructor(
     private readonly userService: UserService,

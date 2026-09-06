@@ -1,12 +1,12 @@
-import { ILoggedInResponse } from '@aquabot/shared/contracts';
+import { ILoggedInResponse } from "@aquabot/shared/contracts";
 import {
   CallHandler,
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
-import { Observable, tap } from 'rxjs';
-import { RefreshTokenService } from '../application/services/refresh-token.service';
+} from "@nestjs/common";
+import { Observable, tap } from "rxjs";
+import { RefreshTokenService } from "../application/services/refresh-token.service";
 
 @Injectable()
 export class SetRefreshTokenInterceptor implements NestInterceptor {

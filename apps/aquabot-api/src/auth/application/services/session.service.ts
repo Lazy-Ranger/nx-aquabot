@@ -1,13 +1,13 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import { ICacheService } from '../../../application/ports/cache.port';
-import { JwtConfig } from '../../../config/jwt.config';
-import { CACHE_SERVICE } from '../../../tokens';
-import { ISessionCreateParams } from '../../contracts/session.type';
-import { Session } from '../../domain/entities';
-import { ISessionRepo } from '../../domain/repos';
-import { SESSION_REPO } from '../../tokens';
+import { Inject, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
+import { JwtConfig } from "@org/server/core";
+import { ICacheService } from "../../../application/ports/cache.port";
+import { CACHE_SERVICE } from "../../../tokens";
+import { ISessionCreateParams } from "../../contracts/session.type";
+import { Session } from "../../domain/entities";
+import { ISessionRepo } from "../../domain/repos";
+import { SESSION_REPO } from "../../tokens";
 
 interface ICachedSession {
   jti: string;
@@ -92,7 +92,7 @@ export class SessionService {
       return;
     }
 
-    const sessions: ICachedSession[] = JSON.parse(isSessionExists || '[]');
+    const sessions: ICachedSession[] = JSON.parse(isSessionExists || "[]");
 
     const session = sessions.find((session) => session.jti === jti);
 
@@ -137,7 +137,7 @@ export class SessionService {
 
     for (const session of sessions) {
       this.destroy(session.jti, userId).catch((err) => {
-        console.log('cannot destroy session', err);
+        console.log("cannot destroy session", err);
       });
     }
 

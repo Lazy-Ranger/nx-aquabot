@@ -1,11 +1,11 @@
 import { ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { AuthGuard } from "@nestjs/passport";
+import { PlatformConfig } from "@org/server/core";
 import { UnauthorizedError } from "@org/server/exceptions";
 import { ErrorReason } from "@org/utils/codes";
 import { Request } from "express";
 import { ICacheService } from "../../application/ports/cache.port";
-import { PlatformConfig } from "../../config/platform.config";
 import { CACHE_SERVICE } from "../../tokens";
 import { SessionService } from "../application/services/session.service";
 import { Strategy } from "../strategies/strategies.constants";

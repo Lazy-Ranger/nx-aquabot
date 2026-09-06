@@ -1,4 +1,8 @@
-import { Provider } from '@aquabot/shared/contracts';
+import {
+  ILoggedInResponse,
+  IRefreshTokenResponse,
+  Provider,
+} from "@aquabot/shared/contracts";
 import {
   Body,
   Controller,
@@ -7,24 +11,28 @@ import {
   UseFilters,
   UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
-import { HttpExceptionFilter } from '@org/server/common';
-import { Principal } from '../../../../common/decorators/principal.decorator';
-import { IHttpRequest, IPrincipal } from '../../../../common/interfaces';
-import { AuthService } from '../../../application/services/auth.service';
+} from "@nestjs/common";
+import {
+  HttpExceptionFilter,
+  IHttpRequest,
+  IPrincipal,
+} from "@org/server/common";
+import { Principal } from "@org/server/libs/server/decorators";
+import { omit } from "lodash";
+import { AuthService } from "../../../application/services/auth.service";
 import {
   LogoutUserAllDeviceUseCase,
   LogoutUserUseCase,
   RefreshTokensUseCase,
-} from '../../../application/use-cases';
-import { IRefreshTokenParams, IUserLoginParams } from '../../../contracts';
-import { JwtAccessTokenGuard } from '../../../guards/jwt-access-token.guard';
-import { JwtRefreshTokenGuard } from '../../../guards/jwt-refresh-token.guard';
-import { ClearRefreshTokenInterceptor } from '../../../interceptors/clear-refresh-token.interceptor';
-import { SetRefreshTokenInterceptor } from '../../../interceptors/set-refresh-token.interceptor';
-import { LoginUserDto, RegisterUserDto } from '../dtos';
+} from "../../../application/use-cases";
+import { IRefreshTokenParams, IUserLoginParams } from "../../../contracts";
+import { JwtAccessTokenGuard } from "../../../guards/jwt-access-token.guard";
+import { JwtRefreshTokenGuard } from "../../../guards/jwt-refresh-token.guard";
+import { ClearRefreshTokenInterceptor } from "../../../interceptors/clear-refresh-token.interceptor";
+import { SetRefreshTokenInterceptor } from "../../../interceptors/set-refresh-token.interceptor";
+import { LoginUserDto, RegisterUserDto } from "../dtos";
 
-@Controller('/auth')
+@Controller("/auth")
 @UseFilters(HttpExceptionFilter)
 export class AuthController {
   constructor(
@@ -34,12 +42,12 @@ export class AuthController {
     private readonly logoutUserAllDevice: LogoutUserAllDeviceUseCase,
   ) {}
 
-  @Post('/register')
+  @Post("/register")
   @UseInterceptors(SetRefreshTokenInterceptor)
   async register(
     @Body() registerUserReq: RegisterUserDto,
     @Req() req: IHttpRequest,
-  ) {
+  ): Promise<ILoggedInResponse> {
     const userRegisterParams = {
       ...registerUserReq,
       provider: Provider.PASSWORD,
@@ -48,9 +56,12 @@ export class AuthController {
     return this.authService.register(userRegisterParams);
   }
 
-  @Post('/login')
+  @Post("/login")
   @UseInterceptors(SetRefreshTokenInterceptor)
-  async login(@Body() loginUserReq: LoginUserDto, @Req() req: IHttpRequest) {
+  async login(
+    @Body() loginUserReq: LoginUserDto,
+    @Req() req: IHttpRequest,
+  ): Promise<ILoggedInResponse> {
     const loginParams: IUserLoginParams = {
       ...loginUserReq,
       clientRequestInfo: req.clientRequestInfo,
@@ -58,18 +69,17 @@ export class AuthController {
     return this.authService.login(loginParams);
   }
 
-  @Post('/logout')
+  @Post("/logout")
   @UseInterceptors(ClearRefreshTokenInterceptor)
   @UseGuards(JwtAccessTokenGuard)
   logout(@Principal() principal: IPrincipal) {
-    console.log('logout', principal);
     return this.logoutUserUseCase.execute(principal, {
       jti: principal.claim.jti,
       userId: principal.id,
     });
   }
 
-  @Post('/logout-all')
+  @Post("/logout-all")
   @UseInterceptors(ClearRefreshTokenInterceptor)
   @UseGuards(JwtAccessTokenGuard)
   logoutAll(@Principal() principal: IPrincipal) {
@@ -79,14 +89,21 @@ export class AuthController {
     });
   }
 
-  @Post('/refresh')
+  @Post("/refresh")
   @UseGuards(JwtRefreshTokenGuard)
   @UseInterceptors(SetRefreshTokenInterceptor)
-  async refresh(@Req() req: IHttpRequest, @Principal() principal: IPrincipal) {
+  async refresh(
+    @Principal() principal: IPrincipal,
+  ): Promise<IRefreshTokenResponse> {
     const refreshTokenParams: IRefreshTokenParams = {
       jti: principal.claim.jti,
     };
 
-    return this.refreshTokenUC.execute(principal, refreshTokenParams);
+    const refreshTokenResp = await this.refreshTokenUC.execute(
+      principal,
+      refreshTokenParams,
+    );
+
+    return omit(refreshTokenResp, "jti");
   }
 }

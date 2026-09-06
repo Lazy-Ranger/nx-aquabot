@@ -1,4 +1,4 @@
 export enum Provider {
-  'GOOGLE' = 'GOOGLE',
-  'PASSWORD' = 'PASSWORD',
+  "GOOGLE" = "GOOGLE",
+  "PASSWORD" = "PASSWORD",
 }

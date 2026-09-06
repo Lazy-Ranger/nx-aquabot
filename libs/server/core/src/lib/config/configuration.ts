@@ -5,11 +5,11 @@ import { JWT_CONFIG } from "./jwt.config";
 import { PLATFORM_CONFIG } from "./platform.config";
 import { REDIS_CONFIG } from "./redis.config";
 
-export default [
+export const configuration = [
   APP_CONFIG,
   DATABASE_CONFIG,
   JWT_CONFIG,
   BCRYPT_CONFIG,
   REDIS_CONFIG,
-  PLATFORM_CONFIG
+  PLATFORM_CONFIG,
 ];

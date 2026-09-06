@@ -11,11 +11,11 @@ export interface DatabaseConfig {
 }
 
 export const DATABASE_CONFIG = registerAs("database", () => {
-  const userName = process.env.MONGO_DATABASE_USER;
-  const password = process.env.MONGO_DATABASE_PASSWORD;
-  const host = process.env.MONGO_DATABASE_HOST;
-  const db = process.env.MONGO_DATABASE_NAME;
-  const port = process.env.MONGO_DATABASE_PORT;
+  const userName = process.env["MONGO_DATABASE_USER"];
+  const password = process.env["MONGO_DATABASE_PASSWORD"];
+  const host = process.env["MONGO_DATABASE_HOST"];
+  const db = process.env["MONGO_DATABASE_NAME"];
+  const port = process.env["MONGO_DATABASE_PORT"];
 
   return {
     user: userName,
