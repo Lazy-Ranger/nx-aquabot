@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { AppConfig, JwtConfig } from "@org/server/core";
+import { JwtConfig } from "@org/server/common";
+import { AppConfig } from "@org/server/core";
 import { CookieOptions, Request, Response } from "express";
 import ms, { StringValue } from "ms";
 import { ICacheService } from "../../../application/ports/cache.port";

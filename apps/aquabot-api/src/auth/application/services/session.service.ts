@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { JwtConfig } from "@org/server/core";
+import { JwtConfig } from "@org/server/common";
 import { ICacheService } from "../../../application/ports/cache.port";
 import { CACHE_SERVICE } from "../../../tokens";
 import { ISessionCreateParams } from "../../contracts/session.type";

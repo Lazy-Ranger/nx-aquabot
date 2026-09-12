@@ -2,7 +2,7 @@ import { UserAlreadyExistsError } from "@aquabot/server/errors";
 import { IUserCreateParams } from "@aquabot/shared/contracts";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { BcryptConfig } from "@org/server/core";
+import { BcryptConfig } from "@org/server/common";
 import { hash } from "bcrypt";
 import { User } from "../../domain/entities";
 import { IUserRepo } from "../../domain/repos";

@@ -1,6 +1,5 @@
 import { registerAs } from "@nestjs/config";
-import { getAppConfig } from "./app.config";
-import { getPlatformConfig } from "./platform.config";
+import { getAppConfig, getPlatformConfig } from "@org/server/core";
 
 export interface JwtConfig {
   "jwt.accessTokenSecret": string;
