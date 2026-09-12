@@ -1,4 +1,4 @@
-import { UserUpdateFailedError } from "@aquabot/server/error";
+import { UserUpdateFailedError } from "@aquabot/server/errors";
 import { IUserUpdateParams, RetrieveUserBy } from "@aquabot/shared/contracts";
 import { Inject, Injectable } from "@nestjs/common";
 import { User } from "../../domain/entities";

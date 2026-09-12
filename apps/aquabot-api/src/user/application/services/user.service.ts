@@ -1,4 +1,4 @@
-import { UserNotFoundError } from "@aquabot/server/error";
+import { UserNotFoundError } from "@aquabot/server/errors";
 import {
   IUser,
   IUserCreateParams,

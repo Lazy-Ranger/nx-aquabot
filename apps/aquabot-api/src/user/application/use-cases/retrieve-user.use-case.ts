@@ -1,4 +1,4 @@
-import { UserNotFoundError } from "@aquabot/server/error";
+import { UserNotFoundError } from "@aquabot/server/errors";
 import { IUserRetrieveParams, RetrieveUserBy } from "@aquabot/shared/contracts";
 import { Inject, Injectable } from "@nestjs/common";
 import { User } from "../../domain/entities";
@@ -24,6 +24,7 @@ export class RetrieveUserUseCase {
   ): Promise<User | null> {
     switch (params.by) {
       case RetrieveUserBy.ID:
+        [];
         return this.userRepo.findById(params.value);
       case RetrieveUserBy.EMAIL:
         return this.userRepo.findByEmail(params.value);

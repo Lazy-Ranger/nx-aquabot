@@ -16,8 +16,8 @@ import {
   HttpExceptionFilter,
   IHttpRequest,
   IPrincipal,
+  Principal,
 } from "@org/server/common";
-import { Principal } from "@org/server/libs/server/decorators";
 import { omit } from "lodash";
 import { AuthService } from "../../../application/services/auth.service";
 import {

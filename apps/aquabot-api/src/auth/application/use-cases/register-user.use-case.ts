@@ -1,4 +1,4 @@
-import { UserAlreadyExistsError } from "@aquabot/server/error";
+import { UserAlreadyExistsError } from "@aquabot/server/errors";
 import { IUser } from "@aquabot/shared/contracts";
 import { Injectable } from "@nestjs/common";
 import { UserService } from "../../../user/application/services";
