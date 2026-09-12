@@ -1,4 +1,8 @@
-import { IUserRetrieveParams, RetrieveUserBy } from "@aquabot/shared/contracts";
+import {
+  IUserResponse,
+  IUserRetrieveParams,
+  RetrieveUserBy,
+} from "@aquabot/shared/contracts";
 import {
   Body,
   Controller,
@@ -18,6 +22,7 @@ import {
 } from "../../../application/use-cases";
 import { SearchUsersDto, UpdateUserDto } from "../dtos";
 import { UserHttpMapper } from "../mappers/user-http.mapper";
+
 @Controller("/users")
 @UseFilters(HttpExceptionFilter)
 @UseGuards(JwtAccessTokenGuard)
@@ -30,6 +35,7 @@ export class UserController {
 
   @Get("search")
   async getUsers(@Query() query: SearchUsersDto) {
+    console.log(query);
     const paginationResult = await this.searchUsersUC.execute(query);
 
     return {
@@ -39,7 +45,7 @@ export class UserController {
   }
 
   @Get(":id")
-  async getUserById(@Param("id") id: string) {
+  async getUserById(@Param("id") id: string): Promise<IUserResponse> {
     const userRetrieveParams: IUserRetrieveParams = {
       by: RetrieveUserBy.ID,
       value: id,
@@ -54,7 +60,7 @@ export class UserController {
   async updateUser(
     @Param("id") id: string,
     @Body() updateUserDto: UpdateUserDto,
-  ) {
+  ): Promise<IUserResponse> {
     const user = await this.updateUserUC.execute(id, updateUserDto);
 
     return UserHttpMapper.toDto(user);

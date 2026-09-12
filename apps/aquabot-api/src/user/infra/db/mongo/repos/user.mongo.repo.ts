@@ -1,16 +1,16 @@
 import {
   IUserSearchFilter,
   IUserSearchParams,
-} from '@aquabot/shared/contracts';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { IOffsetPaginationResult } from '@org/utils/pagination';
-import moment from 'moment';
-import { Model } from 'mongoose';
-import { User } from '../../../../domain/entities';
-import { IUserRepo } from '../../../../domain/repos';
-import { UserMongoMapper } from '../mappers/user-mongo.mapper';
-import { USER_MODEL, UserDocument } from '../schemas';
+} from "@aquabot/shared/contracts";
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { IOffsetPaginationResult } from "@org/utils/pagination";
+import moment from "moment";
+import { Model } from "mongoose";
+import { User } from "../../../../domain/entities";
+import { IUserRepo } from "../../../../domain/repos";
+import { UserMongoMapper } from "../mappers/user-mongo.mapper";
+import { USER_MODEL, UserDocument } from "../schemas";
 
 @Injectable()
 export class UserMongoRepo implements IUserRepo {
@@ -32,7 +32,7 @@ export class UserMongoRepo implements IUserRepo {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = await this.userModel.findOne({ email }).select('+password');
+    const user = await this.userModel.findOne({ email }).select("+password");
     return user ? this.userMapper.toDomain(user) : null;
   }
 
@@ -58,7 +58,7 @@ export class UserMongoRepo implements IUserRepo {
     const { page = 1, limit = 10 } = query;
 
     const { name, status, gender, address, createdAt } = JSON.parse(
-      JSON.parse(query.filter ?? '{}'),
+      JSON.parse(query.filter ?? "{}"),
     ) as IUserSearchFilter;
 
     const findQuery: any = {};
@@ -66,8 +66,8 @@ export class UserMongoRepo implements IUserRepo {
     // Search by name using $or
     if (name) {
       findQuery.$or = [
-        { firstName: { $regex: name, $options: 'i' } },
-        { lastName: { $regex: name, $options: 'i' } },
+        { firstName: { $regex: name, $options: "i" } },
+        { lastName: { $regex: name, $options: "i" } },
       ];
     }
 
@@ -84,17 +84,17 @@ export class UserMongoRepo implements IUserRepo {
     // Filter by country
     if (address?.country) {
       const country = address.country.toUpperCase();
-      findQuery['address.country'] = country;
+      findQuery["address.country"] = country;
     }
 
     if (createdAt) {
       const startOfDay = moment
-        .utc(createdAt, 'YYYY-MM-DD')
-        .startOf('day')
+        .utc(createdAt, "YYYY-MM-DD")
+        .startOf("day")
         .toDate();
       const endOfDay = moment
-        .utc(createdAt, 'YYYY-MM-DD')
-        .endOf('day')
+        .utc(createdAt, "YYYY-MM-DD")
+        .endOf("day")
         .toDate();
 
       Object.assign(findQuery, {

@@ -77,12 +77,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const canBeResourceInfo = [
       HttpStatus.OK,
-      403,
-      404,
-      405,
-      409,
-      500,
-      504,
+      HttpStatus.FORBIDDEN,
+      HttpStatus.NOT_FOUND,
+      HttpStatus.METHOD_NOT_ALLOWED,
+      HttpStatus.CONFLICT,
     ].includes(httpStatusCode);
 
     const statusCode =

@@ -1,5 +1,4 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
-
 import { IHttpRequest } from "@org/server/common";
 
 export const Principal = createParamDecorator(

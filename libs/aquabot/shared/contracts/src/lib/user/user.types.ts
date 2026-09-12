@@ -1,10 +1,10 @@
 import {
   IOffsetPaginationResult,
   IOffsetPaginationSearchQuery,
-} from '@org/utils/pagination';
-import { Provider } from '../auth/auth.constants';
-import { IAddress, IAddressUpdateParams } from './address.types';
-import { Gender, RetrieveUserBy, UserStatus } from './user.constants';
+} from "@org/utils/pagination";
+import { Provider } from "../auth/auth.constants";
+import { IAddress, IAddressUpdateParams } from "./address.types";
+import { Gender, RetrieveUserBy, UserStatus } from "./user.constants";
 
 export interface IUser {
   id: string;
@@ -24,9 +24,11 @@ export interface IUser {
   authId?: string;
 }
 
+export type IUserResponse = Omit<IUserCreateParams, "password | authId">;
+
 export type IUserSearchFilter = Pick<
   Partial<IUser>,
-  'name' | 'status' | 'gender' | 'address' | 'createdAt'
+  "name" | "status" | "gender" | "address" | "createdAt"
 >;
 
 export type IUserSearchParams = IOffsetPaginationSearchQuery;
@@ -35,12 +37,12 @@ export type IUserPaginationResult = IOffsetPaginationResult<IUser>;
 
 export type IUserCreateParams = Omit<
   IUser,
-  'id' | 'name' | 'status' | 'createdAt' | 'updatedAt' | 'authId'
+  "id" | "name" | "status" | "createdAt" | "updatedAt" | "authId"
 > & {
   password?: string;
 };
 
-export type IUserUpdateParams = Partial<Omit<IUserCreateParams, 'address'>> & {
+export type IUserUpdateParams = Partial<Omit<IUserCreateParams, "address">> & {
   address?: IAddressUpdateParams;
 };
 

@@ -23,11 +23,7 @@
       "@org/utils/codes": ["./libs/shared/codes/src/index.ts"],
       "@org/server/common": ["./libs/server/common/src/index.ts"],
       "@org/utils/resources": ["./libs/shared/resources/src/index.ts"],
-      "@aquabot/server/error": ["./libs/aquabot/server/error/src/index.ts"],
-      "@org/server/middlewares": ["./libs/server/middlewares/src/index.ts"],
-      "@org/server/libs/server/decorators": [
-        "./libs/server/decorators/src/index.ts"
-      ]
+      "@aquabot/server/error": ["./libs/aquabot/server/error/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
