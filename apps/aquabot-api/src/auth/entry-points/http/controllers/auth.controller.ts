@@ -12,12 +12,8 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import {
-  HttpExceptionFilter,
-  IHttpRequest,
-  IPrincipal,
-  Principal,
-} from "@org/server/common";
+import { IPrincipal, Principal } from "@org/server/auth";
+import { HttpExceptionFilter, IHttpRequest } from "@org/server/common";
 import { omit } from "lodash";
 import { AuthService } from "../../../application/services/auth.service";
 import {

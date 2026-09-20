@@ -25,6 +25,7 @@ export class Session implements ISession {
   userAgent: IUserAgent;
 
   constructor(props) {
+    // type ???
     this.id = props.id;
     this.jti = props.jti;
     this.userId = props.userId;

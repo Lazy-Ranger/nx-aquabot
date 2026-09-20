@@ -13,7 +13,11 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../cache/src/lib/config/redis.config.ts",
+    "../database/mongodb/src/lib/config/mongodb.config.ts"
+  ],
   "exclude": [
     "jest.config.ts",
     "jest.config.cts",

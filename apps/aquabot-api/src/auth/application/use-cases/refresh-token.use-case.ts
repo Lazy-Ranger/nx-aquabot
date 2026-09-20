@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { IPrincipal } from "@org/server/common";
+import { IPrincipal } from "@org/server/auth";
 import { PlatformConfig } from "@org/server/core";
 import { UserService } from "../../../user/application/services";
 import { IRefreshTokenParams, IssueTokenResponse } from "../../contracts";

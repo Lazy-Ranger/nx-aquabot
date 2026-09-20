@@ -25,7 +25,8 @@
       "@org/utils/resources": ["./libs/shared/resources/src/index.ts"],
       "@aquabot/server/errors": ["./libs/aquabot/server/errors/src/index.ts"],
       "@org/server/cache": ["./libs/server/cache/src/index.ts"],
-      "@org/database/mongodb": ["./libs/server/database/mongodb/src/index.ts"]
+      "@org/database/mongodb": ["./libs/server/database/mongodb/src/index.ts"],
+      "@org/server/auth": ["./libs/server/auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

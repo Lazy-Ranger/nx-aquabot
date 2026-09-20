@@ -1,5 +1,4 @@
 import { Request } from "express";
-import { IPrincipal } from "./principal.types";
 
 export interface IUserAgent {
   browser: string;
@@ -13,7 +12,7 @@ export interface IClientRequestInfo {
   userAgent: IUserAgent;
 }
 
-export interface IHttpRequest<TUser = IPrincipal>
+export interface IHttpRequest<TUser = Record<string, unknown>>
   extends Omit<Request, "user"> {
   userAgent: IUserAgent;
   clientRequestInfo: IClientRequestInfo;

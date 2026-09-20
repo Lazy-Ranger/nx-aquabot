@@ -1,11 +1,10 @@
-import { Gender, IUser, Provider, UserStatus } from '@aquabot/shared/contracts';
-import * as bcrypt from 'bcrypt';
-import { generateId } from '../../../helpers';
-import { Address } from '../value-objects/address.vo';
+import { Gender, IUser, Provider, UserStatus } from "@aquabot/shared/contracts";
+import * as bcrypt from "bcrypt";
+import { Address } from "../value-objects/address.vo";
 
 export type IUserProps = Omit<
   IUser,
-  'id' | 'name' | 'status' | 'createdAt' | 'updatedAt'
+  "id" | "name" | "status" | "createdAt" | "updatedAt"
 > & {
   id?: string;
   status?: UserStatus;
@@ -46,7 +45,7 @@ export class User implements IUser {
   authId: string;
 
   constructor(props: IUserProps) {
-    this.id = props.id ?? generateId();
+    this.id = props.id ?? (null as unknown as string); // FIXME: Typeid generation needed here
     this.firstName = props.firstName;
     this.lastName = props.lastName;
     this.email = props.email;
@@ -64,7 +63,7 @@ export class User implements IUser {
   }
 
   get name(): string {
-    return `${this.firstName} ${this.lastName ?? ''}`;
+    return `${this.firstName} ${this.lastName ?? ""}`;
   }
 
   private generateAuthId(provider: Provider, providerUserId?: string): string {

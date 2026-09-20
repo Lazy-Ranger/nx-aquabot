@@ -1,4 +1,4 @@
-import { IClientRequestInfo, IUserAgent } from "@aquabot/shared/contract";
+import { IClientRequestInfo, IUserAgent } from "./http-request.types";
 
 declare global {
   namespace Express {

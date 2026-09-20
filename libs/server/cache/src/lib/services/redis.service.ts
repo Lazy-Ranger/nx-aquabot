@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { RedisConfig } from "@org/server/core";
 import Redis from "ioredis";
-import { ICacheService } from "../cache.port";
+import { RedisConfig } from "../config";
 
 @Injectable()
-export class RedisService implements ICacheService {
+export class RedisService {
   private readonly redis: Redis;
 
   constructor(config: ConfigService<RedisConfig>) {

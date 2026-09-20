@@ -2,7 +2,7 @@ import { IUser } from "@aquabot/shared/contracts";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { JwtConfig } from "@org/server/common";
+import { JwtConfig } from "@org/server/auth";
 import { randomUUID } from "crypto";
 import { StringValue } from "ms";
 import {

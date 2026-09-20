@@ -4,11 +4,10 @@ import {
   SequelizeModuleOptions,
   SequelizeOptionsFactory,
 } from "@nestjs/sequelize";
-import { DatabaseConfig } from "@org/server/core";
 
 @Injectable()
 export class SequelizeConfigService implements SequelizeOptionsFactory {
-  constructor(private readonly config: ConfigService<DatabaseConfig>) {}
+  constructor(private readonly config: ConfigService<unknown>) {}
 
   createSequelizeOptions(
     connectionName?: string,

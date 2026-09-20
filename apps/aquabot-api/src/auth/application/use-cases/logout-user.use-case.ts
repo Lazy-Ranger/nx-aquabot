@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IPrincipal } from "@org/server/common";
+import { IPrincipal } from "@org/server/auth";
 import { SessionService } from "../../application/services/session.service";
 import { IUserLogoutParams } from "../../contracts";
 

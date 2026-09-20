@@ -1,16 +1,16 @@
 import { registerAs } from "@nestjs/config";
 
-export interface DatabaseConfig {
-  "database.user": string;
-  "database.password": string;
-  "database.host": string;
-  "database.db": string;
-  "database.port": string;
-  "database.url": string;
-  "database.isLocal": boolean;
+export interface MongodbConfig {
+  "mongodb.user": string;
+  "mongodb.password": string;
+  "mongodb.host": string;
+  "mongodb.db": string;
+  "mongodb.port": string;
+  "mongodb.url": string;
+  "mongodb.isLocal": boolean;
 }
 
-export const DATABASE_CONFIG = registerAs("database", () => {
+export const MONGODB_CONFIG = registerAs("mongodb", () => {
   const userName = process.env["MONGO_DATABASE_USER"];
   const password = process.env["MONGO_DATABASE_PASSWORD"];
   const host = process.env["MONGO_DATABASE_HOST"];

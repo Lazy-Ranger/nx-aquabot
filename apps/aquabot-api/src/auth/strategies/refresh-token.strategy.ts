@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
-import { IHttpRequest, JwtConfig } from "@org/server/common";
+import { JwtConfig } from "@org/server/auth";
+import { IHttpRequest } from "@org/server/common";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { RefreshTokenService } from "../application/services/refresh-token.service";
 import { IUserRefreshTokenClaim } from "../contracts";

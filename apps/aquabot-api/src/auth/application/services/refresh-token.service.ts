@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { JwtConfig } from "@org/server/common";
+import { JwtConfig } from "@org/server/auth";
 import { AppConfig } from "@org/server/core";
 import { CookieOptions, Request, Response } from "express";
 import ms, { StringValue } from "ms";
