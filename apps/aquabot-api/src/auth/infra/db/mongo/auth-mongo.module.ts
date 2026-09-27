@@ -8,21 +8,21 @@ import { AUTH_SESSION_MODEL, AuthSessionSchemaDef } from "./schemas";
 const MODELS = [
   {
     name: AUTH_SESSION_MODEL,
-    schema: AuthSessionSchemaDef
-  }
+    schema: AuthSessionSchemaDef,
+  },
 ];
 
 const PROVIDERS: Provider[] = [
   AuthSessionMongoMapper,
   {
     provide: SESSION_REPO,
-    useClass: SessionMongoRepo
-  }
+    useClass: SessionMongoRepo,
+  },
 ];
 
 @Module({
   imports: [MongooseModule.forFeature(MODELS)],
   providers: PROVIDERS,
-  exports: PROVIDERS
+  exports: PROVIDERS,
 })
 export class AuthMongoModule {}

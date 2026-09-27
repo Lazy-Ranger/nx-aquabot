@@ -1,4 +1,4 @@
-import { IAddress } from '@aquabot/shared/contracts';
+import { IAddress } from "@aquabot/shared/contracts";
 
 export type IAccountProps = IAddress;
 

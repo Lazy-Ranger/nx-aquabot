@@ -1,0 +1,70 @@
+import { Gender, IUser, Provider, UserStatus } from "@aquabot/shared/contracts";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { UserResource } from "@org/utils/resources";
+import { HydratedDocument } from "mongoose";
+import { AddressDocument, AddressSchemaDef } from "./address.schema";
+
+export type UserDocument = HydratedDocument<UserSchema>;
+
+export interface IUserPersistence extends Omit<IUser, "id" | "name"> {
+  password?: string;
+}
+
+@Schema({
+  timestamps: true,
+  collection: UserResource.collectionName,
+})
+export class UserSchema implements IUserPersistence {
+  @Prop({ required: true, min: 2, max: 50 })
+  firstName!: string;
+
+  @Prop({
+    min: 2,
+    max: 50,
+  })
+  lastName?: string;
+
+  @Prop({ required: true, unique: true })
+  email!: string;
+
+  @Prop({
+    required: true,
+  })
+  phone!: string;
+
+  @Prop({ required: true, enum: Gender, type: String })
+  gender: Gender;
+
+  @Prop({})
+  picture?: string;
+
+  @Prop({
+    required: true,
+    type: String,
+    enum: UserStatus,
+  })
+  status!: UserStatus;
+
+  @Prop({
+    type: AddressSchemaDef,
+    required: true,
+  })
+  address!: AddressDocument;
+
+  @Prop({ min: 1, max: 100, select: false })
+  password!: string;
+
+  @Prop({ required: true, enum: Provider, type: String })
+  provider!: Provider;
+
+  @Prop({ required: true })
+  authId!: string;
+
+  readonly createdAt!: Date;
+
+  readonly updatedAt!: Date;
+}
+
+export const UserSchemaDef = SchemaFactory.createForClass(UserSchema);
+
+export const USER_MODEL = UserSchema.name;

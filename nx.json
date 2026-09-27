@@ -2,10 +2,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "analytics": false,
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -42,20 +39,18 @@
         "targetName": "test"
       },
       "exclude": [
-        "apps/aquabot-api-e2e/**/*"
+        "apps/aquabot-api-e2e/**/*",
+        "user-service-e2e/**/*",
+        "apps/user-service-e2e/**/*",
+        "apps/auth-service-e2e/**/*"
       ]
     }
   ],
   "targetDefaults": {
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   }
 }

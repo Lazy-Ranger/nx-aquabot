@@ -1,0 +1,65 @@
+import { Inject, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtConfig } from "@org/server/auth";
+import { AppConfig } from "@org/server/core";
+import { CookieOptions, Request, Response } from "express";
+import ms, { StringValue } from "ms";
+import { ICacheService } from "../../../ports/cache.port";
+import { CACHE_SERVICE } from "../../../tokens";
+import { SessionService } from "./session.service";
+
+@Injectable()
+export class RefreshTokenService {
+  private readonly refreshTokenCookieName: string;
+
+  private readonly refreshTokenCookieOptions: CookieOptions;
+
+  constructor(
+    private readonly config: ConfigService<AppConfig & JwtConfig>,
+    @Inject(CACHE_SERVICE) private readonly cache: ICacheService,
+    private readonly sessionService: SessionService,
+  ) {
+    const refreshTokenExpireTime = this.config.getOrThrow<StringValue>(
+      "jwt.refreshTokenExpireTime",
+    );
+
+    this.refreshTokenCookieOptions = {
+      httpOnly: true,
+      secure: !this.config.getOrThrow<boolean>("app.isLocal"),
+      sameSite: "strict" as const,
+      maxAge: ms(refreshTokenExpireTime),
+      path: "/auth",
+    };
+
+    this.refreshTokenCookieName = this.config.getOrThrow(
+      "jwt.refreshTokenCookieName",
+    );
+  }
+
+  public async isTokenRevoked(jti: string) {
+    if (!jti) {
+      return true;
+    }
+
+    return await this.sessionService.validate(jti);
+  }
+
+  public setRefreshToken(refreshToken: string, response: Response) {
+    response.cookie(
+      this.refreshTokenCookieName,
+      refreshToken,
+      this.refreshTokenCookieOptions,
+    );
+  }
+
+  public clearRefreshToken(response: Response) {
+    response.cookie(
+      this.refreshTokenCookieName,
+      this.refreshTokenCookieOptions,
+    );
+  }
+
+  public extractFromCookie(request: Request): string | null {
+    return request?.cookies?.[this.refreshTokenCookieName];
+  }
+}
