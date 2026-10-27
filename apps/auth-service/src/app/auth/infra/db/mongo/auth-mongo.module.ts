@@ -1,6 +1,6 @@
 import { Module, Provider } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { SESSION_REPO } from "../../../tokens";
+import { SESSION_REPO } from "../../../../tokens";
 import { AuthSessionMongoMapper } from "./mapper/session-mongo.mapper";
 import { SessionMongoRepo } from "./repos/session.mongo.repo";
 import { AUTH_SESSION_MODEL, AuthSessionSchemaDef } from "./schemas";

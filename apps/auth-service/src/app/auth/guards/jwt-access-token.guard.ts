@@ -5,13 +5,11 @@ import { PlatformConfig } from "@org/server/core";
 import { UnauthorizedError } from "@org/server/exceptions";
 import { ErrorReason } from "@org/utils/codes";
 import { Request } from "express";
-import { RefreshTokenService } from "../app/application/services/refresh-token.service";
+import { SessionService } from "../application/services/session.service";
 import { Strategy } from "../strategies/strategies.constants";
 
 @Injectable()
-export class JwtRefreshTokenGuard extends AuthGuard(
-  Strategy.JWT_REFRESH_TOKEN,
-) {
+export class JwtAccessTokenGuard extends AuthGuard(Strategy.JWT_ACCESS_TOKEN) {
   private readonly domain: string;
 
   private readonly errorMetadata = {
@@ -20,19 +18,25 @@ export class JwtRefreshTokenGuard extends AuthGuard(
   };
 
   constructor(
-    private readonly refreshTokenService: RefreshTokenService,
+    private readonly sessionService: SessionService,
     private readonly config: ConfigService<PlatformConfig>,
   ) {
     super();
+
     this.domain = this.config.getOrThrow("platform.name");
   }
 
   async canActivate(context: ExecutionContext) {
     await super.canActivate(context);
-    const request = context.switchToHttp().getRequest<Request>();
-    const token = this.refreshTokenService.extractFromCookie(request);
 
-    if (!token || (await this.refreshTokenService.isTokenRevoked(token))) {
+    const request = context.switchToHttp().getRequest<Request>();
+    const userAccessTokenClaim = request.user as Record<string, string>;
+
+    const isTokenRevoked = await this.sessionService.validate(
+      userAccessTokenClaim.jti,
+    );
+
+    if (isTokenRevoked) {
       throw new UnauthorizedError(
         "Access token is invalid or expired.",
         ErrorReason.ACCESS_TOKEN_INVALID,
@@ -41,11 +45,9 @@ export class JwtRefreshTokenGuard extends AuthGuard(
       );
     }
 
-    const userRefreshTokenClaim = request.user; // decoded via passport
-
     request.user = {
-      id: token,
-      claim: userRefreshTokenClaim,
+      id: userAccessTokenClaim.sub,
+      claim: userAccessTokenClaim,
     };
 
     return true;
@@ -53,14 +55,9 @@ export class JwtRefreshTokenGuard extends AuthGuard(
 
   handleRequest(err, user, info) {
     if (err || !user) {
-      console.log("Error in JWT Refresh Token Guard:", err, info);
-      // const unauthorizedError = new UnauthorizedError(err?.message);
-
-      // throw new UnauthorizedException(unauthorizedError);
-
       throw new UnauthorizedError(
         err?.message,
-        ErrorReason.ACCESS_TOKEN_INVALID,
+        ErrorReason.REFRESH_TOKEN_INVALID,
         this.domain,
         this.errorMetadata,
       );

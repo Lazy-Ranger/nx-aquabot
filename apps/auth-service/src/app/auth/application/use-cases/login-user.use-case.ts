@@ -1,6 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { UnauthorizedError } from "@org/server/exceptions";
-import { UserService } from "../../../user/application/services";
+// import { UserService } from "../../../user/application/services";
+import { IUserService } from "../../../ports/user-service.port";
+import { USER_SERVICE } from "../../../tokens";
 import { ILoggedInUserResult, IUserLoginParams } from "../../contracts";
 import { IssueTokensUseCase } from "./issue-tokens.use-case";
 
@@ -9,7 +11,8 @@ export class LoginUserUseCase {
   private readonly domain: string;
 
   constructor(
-    private readonly userService: UserService,
+    // private readonly userService: IUserService,
+    @Inject(USER_SERVICE) private readonly userService: IUserService,
     private readonly issueTokensUseCase: IssueTokensUseCase,
   ) {}
 

@@ -6,7 +6,7 @@ import {
   NestInterceptor,
 } from "@nestjs/common";
 import { Observable, tap } from "rxjs";
-import { RefreshTokenService } from "../app/application/services/refresh-token.service";
+import { RefreshTokenService } from "../application/services/refresh-token.service";
 
 @Injectable()
 export class SetRefreshTokenInterceptor implements NestInterceptor {

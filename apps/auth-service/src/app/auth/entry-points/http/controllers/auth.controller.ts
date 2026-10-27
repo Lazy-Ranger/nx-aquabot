@@ -15,10 +15,6 @@ import {
 import { IPrincipal, Principal } from "@org/server/auth";
 import { HttpExceptionFilter, IHttpRequest } from "@org/server/common";
 import { omit } from "lodash";
-import { JwtAccessTokenGuard } from "../../../../guards/jwt-access-token.guard";
-import { JwtRefreshTokenGuard } from "../../../../guards/jwt-refresh-token.guard";
-import { ClearRefreshTokenInterceptor } from "../../../../interceptors/clear-refresh-token.interceptor";
-import { SetRefreshTokenInterceptor } from "../../../../interceptors/set-refresh-token.interceptor";
 import { AuthService } from "../../../application/services/auth.service";
 import {
   LogoutUserAllDeviceUseCase,
@@ -26,6 +22,10 @@ import {
   RefreshTokensUseCase,
 } from "../../../application/use-cases";
 import { IRefreshTokenParams, IUserLoginParams } from "../../../contracts";
+import { JwtAccessTokenGuard } from "../../../guards/jwt-access-token.guard";
+import { JwtRefreshTokenGuard } from "../../../guards/jwt-refresh-token.guard";
+import { ClearRefreshTokenInterceptor } from "../../../interceptors/clear-refresh-token.interceptor";
+import { SetRefreshTokenInterceptor } from "../../../interceptors/set-refresh-token.interceptor";
 import { LoginUserDto, RegisterUserDto } from "../dtos";
 
 @Controller("/auth")

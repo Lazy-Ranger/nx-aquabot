@@ -13,7 +13,7 @@ export interface AppConfig {
 }
 
 export const getAppConfig = () => {
-  const port = parseInt(process.env["APP_PORT"] || "3000");
+  const port = parseInt(process.env["PORT"] || "3000");
 
   return {
     port,

@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { userAgentMiddleware } from "@org/server/common";
-import { AppConfig, AppEnv } from "@org/server/core";
+import { UserAppConfig, UserAppEnv } from "@org/server/core";
 import { BadRequest } from "@org/server/exceptions";
 import { ErrorCode } from "@org/utils/codes";
 import cookieParser from "cookie-parser";
@@ -12,10 +12,10 @@ import { AppModule } from "./app/app.module";
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const configService = app.get(ConfigService<AppConfig>);
+  const configService = app.get(ConfigService<UserAppConfig>);
 
-  const port = configService.getOrThrow<number>("app.port");
-  const appEnv = configService.getOrThrow<AppEnv>("app.env");
+  const port = configService.getOrThrow<number>("user-app.port");
+  const appEnv = configService.getOrThrow<UserAppEnv>("user-app.env");
 
   app.useGlobalPipes(
     new ValidationPipe({

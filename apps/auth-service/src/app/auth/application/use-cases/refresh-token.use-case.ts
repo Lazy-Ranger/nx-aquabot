@@ -1,8 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { IPrincipal } from "@org/server/auth";
 import { PlatformConfig } from "@org/server/core";
-import { UserService } from "../../../user/application/services";
+// import { UserService } from "../../../user/application/services";
+import { IUserService } from "../../../ports/user-service.port";
+import { USER_SERVICE } from "../../../tokens";
 import { IRefreshTokenParams, IssueTokenResponse } from "../../contracts";
 import { SessionService } from "../services/session.service";
 import { IssueTokensUseCase } from "./issue-tokens.use-case";
@@ -16,7 +18,7 @@ export class RefreshTokensUseCase {
     locationType: "Invalid credentials",
   };
   constructor(
-    private readonly userService: UserService,
+    @Inject(USER_SERVICE) private readonly userService: IUserService,
     private readonly issueTokensUseCase: IssueTokensUseCase,
     private readonly sessionService: SessionService,
     private readonly config: ConfigService<PlatformConfig>,
